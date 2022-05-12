@@ -6,6 +6,10 @@ package it.unibs.IngSftw4.mainClasses;
  */
 public enum StatoOfferta {
     RITIRATA,
+    ACCOPIATA,
+    SELEZIONATA,
+    INSCAMBIO,
+    CHIUSA,
     APERTA;
 
     /**
@@ -14,11 +18,25 @@ public enum StatoOfferta {
      */
     public String toStringStato(){
         String s=null;
-        if(this== RITIRATA){
-            s="ritirata";
-        }
-        else{
-            s="aperta";
+        switch(this){
+            case APERTA:
+                s="aperta";
+            break;
+            case RITIRATA:
+                s="ritirata";
+            break;
+            case INSCAMBIO:
+                s="in scambio";
+            break;
+            case ACCOPIATA:
+                s="accoppiata";
+            break;
+            case CHIUSA:
+                s="chiusa";
+            break;
+            case SELEZIONATA:
+                s="selezionata";
+            break;
         }
         return s;
     }
@@ -29,10 +47,27 @@ public enum StatoOfferta {
      * @return
      */
     public static StatoOfferta getStatoFromString(String stato){
-        if(stato.equals("ritirata")){
-            return RITIRATA;
+        StatoOfferta s=null;
+        switch(stato){
+            case "aperta":
+                 s=StatoOfferta.APERTA;
+                break;
+            case "ritirata":
+                s=StatoOfferta.RITIRATA;
+                break;
+            case "in scambio":
+                s=StatoOfferta.INSCAMBIO;
+                break;
+            case "accoppiata":
+               s=StatoOfferta.ACCOPIATA;
+                break;
+            case "chiusa":
+                s=StatoOfferta.CHIUSA;
+                break;
+            case "selezionata":
+                s=StatoOfferta.SELEZIONATA;
+                break;
         }
-        else
-            return APERTA;
+        return s;
     }
 }
