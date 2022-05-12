@@ -63,6 +63,15 @@ public class Intervallo {
         }
         return uguale;
     }
+
+    public String toStringIntervallo(){
+        StringBuffer sb=new StringBuffer();
+        sb.append("dalle ");
+        sb.append(this.ore[0].toStringOrario());
+        sb.append(" alle ");
+        sb.append(this.ore[1].toStringOrario());
+        return sb.toString();
+    }
     /**
      * Metodo per settare gli orari di un intervallo
      * @param ore gli orari con cui settare l'intervallo

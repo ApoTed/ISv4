@@ -101,6 +101,18 @@ public class ParametriScambi {
     }
 
     /**
+     * metodo che restituisce i giorni della settimana sotto forma di numero partendo da giovedì
+     * @return lista dei numeri rispettivi ai giorni
+     */
+    public ArrayList<Integer> giorniInInteri(){
+        ArrayList <Integer> giorniInNum=new ArrayList<>();
+        for(Giorno g: this.giorni){
+           giorniInNum.add(g.getNumFromDay());
+        }
+        return giorniInNum;
+    }
+
+    /**
      * Metodo statico per l'inserimento dei parametri del sistema per la prima volta
      * @return i parametri di scambio inseriti
      */
@@ -208,6 +220,19 @@ public class ParametriScambi {
 
     }
 
+    public String vediIntervalli(){
+        StringBuffer sb=new StringBuffer();
+        int count=0;
+        sb.append("Gli intervalli sono: \n");
+        for(Intervallo i: this.intervalli){
+            sb.append(i.toStringIntervallo()+"\t");
+            count++;
+            if(count%6==0);
+            sb.append("\n");
+        }
+        return sb.toString();
+    }
+
     /**
      * Metodo per togliere un intervallo dalla lista
      */
@@ -234,6 +259,17 @@ public class ParametriScambi {
         else
             System.out.println("l'intervallo inserito non è presente");
     }
+
+    public String scegliLuogo(){
+        int count=1;
+        for(String s:this.luoghi){
+            System.out.println(count+") "+s);
+            count++;
+        }
+        int indexLuogo=Utilita.leggiIntero("Inserisci il numero corrispondente al luogo che vuoi scegliere: ",1,this.luoghi.size());
+        return this.luoghi.get(indexLuogo-1);
+    }
+
 
     /**
      * Metodo per aggiungere un giorno inserito dall'utente
@@ -349,6 +385,7 @@ public class ParametriScambi {
                 break;
         }
     }
+
 
 }
 

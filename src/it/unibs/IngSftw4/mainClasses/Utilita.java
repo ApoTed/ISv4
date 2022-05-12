@@ -1,8 +1,7 @@
 package it.unibs.IngSftw4.mainClasses;
 
 
-import java.util.InputMismatchException;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * Classe contente vari metodi statici di utilità
@@ -116,6 +115,70 @@ public class Utilita {
             System.out.println(CATEGORIA_NON_PRESENTE);
         }
         return trovata;
+    }
+
+    /**
+     * metodo che controlla che la data inserita sia uno dei giorni della settimana disponibili
+     * @param dataStringa data in forma di stringa
+     * @param listaGiorniSettimana lista di giorni della settimana disponibili in numero della settimana
+     * @return true se è prsente false altrimenti
+     */
+    public static boolean checkGiornoSettimana(String dataStringa, ArrayList<Integer> listaGiorniSettimana){
+        Calendar c=Calendar.getInstance(Locale.ITALY);
+        int year=Integer.valueOf(dataStringa.substring(0,4));
+        int mm=Integer.valueOf(dataStringa.substring(5,7));
+        int day=Integer.valueOf(dataStringa.substring(8,10));
+        c.set(year,mm,day);
+        boolean valido=false;
+        int i= c.get(Calendar.DAY_OF_WEEK);
+        if(listaGiorniSettimana.contains(i))
+            valido=true;
+        return valido;
+    }
+    public static String inserisciData(){
+        StringBuffer sb=new StringBuffer();
+        int anno=Utilita.leggiIntero("Inserisci l'anno per esteso: ",2021,2100);
+        sb.append(Integer.toString(anno));
+        sb.append("/");
+        if(anno % 400 == 0 || anno %4 == 0 && anno % 100 != 0){
+            sb.append(inserisciGiornoMese(true));
+        }
+        else{
+            sb.append(inserisciGiornoMese(false));
+        }
+        return sb.toString();
+    }
+    public static String inserisciGiornoMese(boolean bisestile){
+        int meseNum=Utilita.leggiIntero("Inserisci il numero del mese: ", 1,12);
+        StringBuffer meseGiorno=new StringBuffer();
+        if(meseNum<10){
+            meseGiorno.append("0");
+            meseGiorno.append(Integer.toString(meseNum));
+        }
+        else{
+            meseGiorno.append(Integer.toString(meseNum));
+        }
+        int giorniMassimi=0;
+        if(meseNum==9 || meseNum==4 || meseNum==6 || meseNum==11){
+            giorniMassimi=30;
+        }else if(meseNum==2){
+            if(bisestile)
+                giorniMassimi=29;
+            else
+                giorniMassimi=28;
+        }
+        else{
+            giorniMassimi=31;
+        }
+        meseGiorno.append("/");
+        int giorno=Utilita.leggiIntero("Inserisci il giorno del mese: ",1,giorniMassimi);
+        if(giorno<10){
+            meseGiorno.append("0");
+            meseGiorno.append(Integer.toString(giorno));
+        }
+        else
+            meseGiorno.append(Integer.toString(giorno));
+        return meseGiorno.toString();
     }
 
 }

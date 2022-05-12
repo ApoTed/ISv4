@@ -46,6 +46,7 @@ public class main {
             listaOff.addAll(XmlReader.leggiOfferte("offerte.xml").getListaOfferte());
         }
         Offerte offerte=new Offerte(listaOff);
+        PropostaIncontro p=PropostaIncontro.creaProposta(acceduto.getUsername(), conf.getParametri());
         if(acceduto instanceof Configuratore){
             String titolo="Benvenuto nel sistema di gestione baratti";
             String[] voci=new String[]{};

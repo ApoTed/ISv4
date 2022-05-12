@@ -76,5 +76,33 @@ public enum Giorno {
         }
         return null;
     }
+    public int getNumFromDay(){
+        int numOfTheWeek=0;
+        switch(this){
+            case LUNEDI :
+                numOfTheWeek=5;
+                break;
+            case MARTEDI:
+                numOfTheWeek=6;
+                break;
+            case MERCOLEDI:
+                numOfTheWeek=7;
+                break;
+            case GIOVEDI:
+                numOfTheWeek=1;
+                break;
+            case VENERDI:
+                numOfTheWeek=2;
+                break;
+            case SABATO:
+                numOfTheWeek=3;
+                break;
+            case DOMENICA:
+                numOfTheWeek=4;
+                break;
+
+        }
+        return numOfTheWeek;
+    }
 }
 
