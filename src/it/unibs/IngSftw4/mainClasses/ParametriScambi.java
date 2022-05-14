@@ -223,7 +223,11 @@ public class ParametriScambi {
     public String vediIntervalli(){
         StringBuffer sb=new StringBuffer();
         int count=0;
-        sb.append("Gli intervalli sono: \n");
+        if(this.intervalli.size()==1){
+            sb.append("L'intervallo è: \n");
+        }
+        else
+            sb.append("Gli intervalli sono: \n");
         for(Intervallo i: this.intervalli){
             sb.append(i.toStringIntervallo()+"\t");
             count++;

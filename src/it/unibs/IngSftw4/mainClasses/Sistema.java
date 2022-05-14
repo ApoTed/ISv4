@@ -129,16 +129,16 @@ public class Sistema {
      */
     public Categoria [] scegliFoglia() {
         Categoria[] questaRadice = new Categoria[2];
-        int count = 0;
+        int count = 1;
         for (Gerarchia g : this.listaGerarchie) {
             System.out.print("\n" + count+")  ");
             System.out.println(g.getRadice().toStringCategoria());
             count++;
         }
-        int sceltaGer = Utilita.leggiIntero("Scegli il numero rispettivo alla categoria radice da cui vuoi partire a cercare la categoria voluta: ", 0, this.listaGerarchie.size()-1);
+        int sceltaGer = Utilita.leggiIntero("Scegli il numero rispettivo alla categoria radice da cui vuoi partire a cercare la categoria voluta: ", 0, this.listaGerarchie.size());
         boolean fineScelta = false;
-        ArrayList <Categoria> foglie=this.listaGerarchie.get(sceltaGer).listaFoglie();
-        int countF=0;
+        ArrayList <Categoria> foglie=this.listaGerarchie.get(sceltaGer-1).listaFoglie();
+        int countF=1;
         System.out.println();
         for(Categoria f:foglie){
             System.out.print(countF+")  ");
@@ -147,8 +147,8 @@ public class Sistema {
         }
         int sceltaFoglia = Utilita.leggiIntero("Inserisci il numero della categoria, se nessuna ti va bene premi 0 e si annulla l'operazione corrente: ", 0, foglie.size());
         if(sceltaFoglia!=0){
-            questaRadice[0]=foglie.get(sceltaFoglia);
-            questaRadice[1]=this.listaGerarchie.get(sceltaGer).getRadice();
+            questaRadice[0]=foglie.get(sceltaFoglia-1);
+            questaRadice[1]=this.listaGerarchie.get(sceltaGer-1).getRadice();
         }
         else{
             System.out.println("Selezione categoria annullata");

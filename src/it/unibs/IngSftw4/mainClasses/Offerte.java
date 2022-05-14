@@ -68,9 +68,9 @@ public class Offerte {
      * @return Offerta scelta
      */
     public Offerta scegliOfferta(){
-        System.out.println("Queste sono le tue offerte : ");
+        System.out.println("Queste sono le offerte: ");
         System.out.println(this.toStringOfferte());
-        int scelta=Utilita.leggiIntero("scegli il numero relativo all'offerta scelta: ",0, this.listaOfferte.size());
+        int scelta=Utilita.leggiIntero("Scegli il numero relativo all'offerta scelta: ",0, this.listaOfferte.size());
         return this.listaOfferte.get(scelta);
     }
 
@@ -78,10 +78,10 @@ public class Offerte {
      * metodo per cambiare lo stato di una offerta esistente
      * @param toChange offerta di cui si vuole cambiare lo stato
      */
-    public void modificaOffertaEsistente(Offerta toChange){
+    public void modificaOffertaEsistente(Offerta toChange, StatoOfferta so){
         int indice=this.listaOfferte.indexOf(toChange);
         Offerta temp=this.listaOfferte.get(indice);
-        temp.cambiaStato();
+        temp.cambiaStato(so);
         this.listaOfferte.remove(indice);
         this.listaOfferte.add(temp);
     }
@@ -142,23 +142,24 @@ public class Offerte {
     }
 
     /**
-     * metodo metodo per scegliere tra le offerte scambiali in base all'offerta daScambiare
+     * metodo che restituisce le offerte con l'offerta daScambiare può proporre uno scambio
      * @param daScambiare offerta di cui si vogliono le possibili offerte con cui scambiarla
-     * @return offerta con cui si vuole fare lo scambio
+     * @return le offerte  con cui si può fare lo scambio
      */
-    public Offerta scegliOffertaScambio(Offerta daScambiare){
+    public Offerte offerteScambiabili(Offerta daScambiare){
         ArrayList <Offerta> offerteScambiabili=new ArrayList<Offerta>();
         String nomef= daScambiare.getNomeFruitore();
         offerteScambiabili.addAll(this.offerteFoglia(daScambiare.getNomeCategoria(),daScambiare.getNomeRadice())
                 .getListaOfferte());
         Offerte of=new Offerte(offerteScambiabili);
         of.togliRitirate();
+        ArrayList <Offerta> papabili=new ArrayList<>();
         for(Offerta offerta: of.getListaOfferte()){
-            if(offerta.getNomeFruitore().equals(daScambiare.getNomeFruitore())){
-                this.togliOfferta(offerta);
+            if(!offerta.getNomeFruitore().equals(daScambiare.getNomeFruitore())){
+                papabili.add(offerta);
             }
         }
-        return of.scegliOfferta();
+        return new Offerte(papabili);
     }
 
     /**

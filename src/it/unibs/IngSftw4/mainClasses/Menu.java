@@ -12,7 +12,7 @@ public class Menu {
     final private static String VOCE_USCITA = "0\tEsci";
     final private static String RICHIESTA_INSERIMENTO = "Digita il numero dell'opzione desiderata : ";
     final private static String[] VOCI_Configuratore = new String[]{"Inserimento nuova gerarchia","Visualizzazione delle gerarchie","Modifica dei parametri","Visualizza le offerte di una categoria"};
-    public static final String[] VOCI_Fruitore = new String[]{"Visualizza le radici e i parametri di sistema","Pubblicazione prodotto","Modificare una offerta già esistente","visualizza le tue offerte","Visualizza le offerte di una categoria","Proporre uno scambio"};
+    public static final String[] VOCI_Fruitore = new String[]{"Visualizza le radici e i parametri di sistema","Pubblicazione prodotto","Modificare una offerta già esistente","visualizza le tue offerte","Visualizza le offerte di una categoria","Proporre uno scambio","Controllare gli scambi"};
     public static final int ZERO = 0;
     public static final int UNO = 1;
 
@@ -120,7 +120,7 @@ public class Menu {
      * Metodo per la gestione del menu del fruitore
      * @param conf la configurazione su cui opera il fruitore
      */
-    public void MenuFruitore(Configurazione conf,Fruitore f,Offerte offerte){
+    public void MenuFruitore(Configurazione conf,Fruitore f,Offerte offerte,ListaScambi listascambi){
         int rispostaFruitore;
         this.setVoci(VOCI_Fruitore);
         do {
@@ -155,7 +155,7 @@ public class Menu {
                         Offerta toChange=offerteFruitore.scegliOfferta();
                         int sceltaSicura=Utilita.leggiIntero("Premi 1 se sei sicuro di cancellare tale offerta altrimenti 0",0,1);
                         if(sceltaSicura==1){
-                            offerte.modificaOffertaEsistente(toChange);
+                            offerte.modificaOffertaEsistente(toChange, StatoOfferta.RITIRATA);
                             System.out.println("Offerta ritirata correttamente");
                         }
                     }
@@ -172,7 +172,45 @@ public class Menu {
                     offerte.stampaOfferteFoglia(conf);
                     break;
                 case 6:
+                    Scambio scambio=Scambio.creaScambio(conf,offerte, f);
+                    if(scambio!=null){
+                        listascambi.addScambio(scambio);
+                    }
+                    break;
+                case 7:
+                    int sceltaFattiRicevuti=Utilita.leggiIntero("1 se vuoi vedere gli scambi che hai proposto\n0 se vuoi vedere quelli che ti sono stati proposti: ");
+                    if(sceltaFattiRicevuti==1){
+                        ListaScambi fatti=listascambi.scambiOfferente(f);
+                        if(fatti.getScambi().size()>0){
+                            Scambio scambioScelto=fatti.scegliScambio();
+                            if(scambioScelto!=null){
+                                scambioScelto.gestisciScambio(f,conf.getParametri());
+                                listascambi.addScambio(scambioScelto);
+                            }
+                            else
+                                break;
+                        }
+                        else{
+                            System.out.println("Non hai proposto scambi");
+                        }
 
+                    }
+                    else{ //if per quando non ce ne sono
+                        ListaScambi ricevuti=listascambi.scambiRicevente(f);
+                        if(ricevuti.getScambi().size()>0){
+                            Scambio scambioScelto=ricevuti.scegliScambio();
+                            if(scambioScelto!=null){
+                                scambioScelto.gestisciScambio(f,conf.getParametri());
+                                listascambi.addScambio(scambioScelto);
+                            }
+                            else
+                                break;
+                        }
+                        else{
+                            System.out.println("Non ti sono stati proposti scambi");
+                        }
+
+                    }
                     break;
                 default:
                     break;

@@ -48,8 +48,8 @@ public class PropostaIncontro {
         }
         boolean compreso=false;
         Orario inizio=null;
+        System.out.println("Adesso inserisci a che ora: ");
         do{
-            System.out.println("Adesso inserisci a che ora: ");
             System.out.println(ps.vediIntervalli());
             boolean finito = false;
             do {
@@ -65,10 +65,31 @@ public class PropostaIncontro {
             for(Intervallo i:ps.getIntervalli()){
                 if(inizio.isInsideIntervallo(i.getOre()[0], i.getOre()[1]))
                     compreso=true;
+                else
+                    System.out.println("L'orario inserito non rientra in un intervallo");
             }
         }while(!compreso);
         long timeNow= Calendar.getInstance().getTimeInMillis();
         PropostaIncontro proposta=new PropostaIncontro(fruitoreNome, luogoScelto, inizio, dataTemp,timeNow);
+        System.out.println("Creazione proposta terminata con successo");
         return proposta;
+    }
+
+    public String visualizzaProposta(){
+        StringBuffer sb=new StringBuffer();
+        sb.append("\nIl luogo proposto è: "+ this.luogo+ " alle ore: "+this.ora.toStringOrario()+"\nIn data: "+ this.data);
+        return sb.toString();
+    }
+
+    public long getTempo() {
+        return tempo;
+    }
+
+    public String getLuogo() {
+        return luogo;
+    }
+
+    public String getNomeFruitore() {
+        return nomeFruitore;
     }
 }

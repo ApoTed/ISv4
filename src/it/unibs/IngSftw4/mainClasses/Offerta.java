@@ -98,9 +98,9 @@ public class Offerta {
     /**
      * Metodo per effettuare il cambio di stato di un'offerta
      */
-    public void cambiaStato(){
+    public void cambiaStato(StatoOfferta so){
         this.statiPassati.add(this.statoAttuale);
-        this.statoAttuale=StatoOfferta.RITIRATA;
+        this.statoAttuale=so;
     }
 
     /**
@@ -124,7 +124,7 @@ public class Offerta {
     }
 
     /**
-     * Metodo che restituisce una stringa che descrive l'offerta
+     * Metodo che restituisce una stringa che descrive l'offerta senza l'autore
      * @return la stringa che descrive l'offerta
      */
     public String toStringOfferta(){
@@ -132,6 +132,17 @@ public class Offerta {
         stb.append(" Categoria: " + this.getNomeCategoria()+"\n");
         stb.append(this.toStringCompilazioni());
         stb.append("\tStato dell'offerta: " + this.getStatoAttuale().toStringStato());
+
+        return stb.toString();
+    }
+
+    /**
+     * metodo per visualizzare l'offerta e anche il realtivo autore
+     * @return la stringa con le informazioni sull'offerta autore incluso
+     */
+    public String toStringOffertaConAutore(){
+        StringBuffer stb=new StringBuffer();
+        stb.append(this.toStringOfferta());
         stb.append("\n\tAutore offerta: " + this.getNomeFruitore()+"\n");
         return stb.toString();
     }

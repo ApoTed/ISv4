@@ -6,12 +6,18 @@ import it.unibs.IngSftw4.xmlUtilities.*;
 
 
 import java.io.File;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class main {
 
-    public static void main(String[] args) throws XMLStreamException, ParserConfigurationException {
+    public static void main(String[] args) throws XMLStreamException, ParserConfigurationException, ParseException {
         // TODO Auto-generated method stubsss
+        //long lgwegw=Calendar.getInstance().getTimeInMillis();
+        //long bbeoe=lgwegw+(24*60*60*1000*2); tempo attuale + 2 giorni
+
+
         ArrayList <Utente> l=new ArrayList<Utente>();
         DatiUtenti x=new DatiUtenti(l);
         File fileUtenti = new File("listaUtenti.xml");
@@ -46,7 +52,12 @@ public class main {
             listaOff.addAll(XmlReader.leggiOfferte("offerte.xml").getListaOfferte());
         }
         Offerte offerte=new Offerte(listaOff);
-        PropostaIncontro p=PropostaIncontro.creaProposta(acceduto.getUsername(), conf.getParametri());
+        ArrayList<Scambio> ls=new ArrayList<>();
+        ListaScambi scambi=new ListaScambi(ls);
+        if(ls.size()!=0){
+            scambi.controllaValiditaScambi(conf.getParametri());
+        }
+        //PropostaIncontro p=PropostaIncontro.creaProposta(acceduto.getUsername(), conf.getParametri());
         if(acceduto instanceof Configuratore){
             String titolo="Benvenuto nel sistema di gestione baratti";
             String[] voci=new String[]{};
@@ -54,23 +65,12 @@ public class main {
             m.MenuConfiguratore(conf, offerte);
         }
         if(acceduto instanceof  Fruitore){
+           // Scambio scambio= Scambio.creaScambio(conf,offerte, (Fruitore) acceduto);
             String titolo="Benvenuto nel sistema di gestione baratti";
             String[] voci=new String[]{};
             Menu m=new Menu(titolo,voci);
-            m.MenuFruitore(conf, (Fruitore) acceduto, offerte);
+            m.MenuFruitore(conf, (Fruitore) acceduto, offerte,scambi);
         }
-
-       /* ArrayList<String> luoghi=new ArrayList<String>();
-        luoghi.add("a");
-        luoghi.add("s");
-        luoghi.add("d");
-        ArrayList<Giorno> giorni=new ArrayList<>();
-        giorni.add(Giorno.MARTEDI);
-        giorni.add(Giorno.GIOVEDI);
-        Orario[] ore=new Orario[]{new Orario(10,00),new Orario(15,00)};
-        ParametriScambi p=new ParametriScambi("Brescia",luoghi,giorni,ore,15);
-        System.out.println(p.toStringParametri());
-        */
         System.out.println("\nFINE PROGRAMMA");
         if(offerte.getListaOfferte().size()!=0)
             XmlWriter.salvaOfferte(offerte, "offerte.xml");
@@ -78,9 +78,6 @@ public class main {
         if(conf.getSis().getListaGerarchie().size()!=0){
             XmlWriter.salvaSistema(conf.getSis(), "sistema.xml");
         }
-
         XmlWriter.utentiWrite(x, "listaUtenti.xml");
-
     }
-
 }

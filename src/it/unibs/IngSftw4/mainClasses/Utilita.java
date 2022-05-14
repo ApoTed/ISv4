@@ -1,6 +1,8 @@
 package it.unibs.IngSftw4.mainClasses;
 
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -139,7 +141,7 @@ public class Utilita {
         StringBuffer sb=new StringBuffer();
         int anno=Utilita.leggiIntero("Inserisci l'anno per esteso: ",2021,2100);
         sb.append(Integer.toString(anno));
-        sb.append("/");
+        sb.append("-");
         if(anno % 400 == 0 || anno %4 == 0 && anno % 100 != 0){
             sb.append(inserisciGiornoMese(true));
         }
@@ -170,7 +172,7 @@ public class Utilita {
         else{
             giorniMassimi=31;
         }
-        meseGiorno.append("/");
+        meseGiorno.append("-");
         int giorno=Utilita.leggiIntero("Inserisci il giorno del mese: ",1,giorniMassimi);
         if(giorno<10){
             meseGiorno.append("0");
@@ -179,6 +181,16 @@ public class Utilita {
         else
             meseGiorno.append(Integer.toString(giorno));
         return meseGiorno.toString();
+    }
+
+    /**
+     * metodo che restituisce la differenza tra due istanti in giorni
+     * @param old istante vecchio
+     * @param nuovo instante nuovo
+     * @return nuovo-old
+     */
+    public static long compareIstants(long old, long nuovo){
+        return  ((nuovo/(1000*60*60*24))-(old/(1000*60*60*24)));
     }
 
 }
