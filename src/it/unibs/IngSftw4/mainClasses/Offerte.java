@@ -55,11 +55,17 @@ public class Offerte {
     public  String toStringOfferte(){
         StringBuffer s=new StringBuffer();
         int count=0;
-        for(Offerta o:this.listaOfferte){
-            s.append("\n"+count +") " );
-            s.append(o.toStringOfferta());
-            count++;
+        if(this.listaOfferte.size()==0){
+            s.append("Non ci sono offerte");
         }
+        else{
+            for(Offerta o:this.listaOfferte){
+                s.append("\n"+count +") " );
+                s.append(o.toStringOfferta());
+                count++;
+            }
+        }
+
         return s.toString();
     }
 

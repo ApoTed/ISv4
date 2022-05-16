@@ -6,7 +6,7 @@ package it.unibs.IngSftw4.mainClasses;
  */
 public enum StatoOfferta {
     RITIRATA,
-    ACCOPIATA,
+    ACCOPPIATA,
     SELEZIONATA,
     INSCAMBIO,
     CHIUSA,
@@ -28,7 +28,7 @@ public enum StatoOfferta {
             case INSCAMBIO:
                 s="in scambio";
             break;
-            case ACCOPIATA:
+            case ACCOPPIATA:
                 s="accoppiata";
             break;
             case CHIUSA:
@@ -59,7 +59,7 @@ public enum StatoOfferta {
                 s=StatoOfferta.INSCAMBIO;
                 break;
             case "accoppiata":
-               s=StatoOfferta.ACCOPIATA;
+               s=StatoOfferta.ACCOPPIATA;
                 break;
             case "chiusa":
                 s=StatoOfferta.CHIUSA;

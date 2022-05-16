@@ -306,4 +306,195 @@ public class XmlWriter {
             e.printStackTrace();
         }
     }
+
+    public static void scriviScambi(ListaScambi listaScambi,String filename)  {
+        try{
+            DocumentBuilderFactory documentFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder documentBuilder = documentFactory.newDocumentBuilder();
+            Document document = documentBuilder.newDocument();
+
+            Element scambi=document.createElement("scambi");
+            document.appendChild(scambi);
+
+           for(Scambio sca:listaScambi.getScambi()){
+               //offerta offerente
+               Element scambio=document.createElement("scambio");
+               scambi.appendChild(scambio);
+
+               Offerta offerente=sca.getOfferente();
+               Element offerta=document.createElement("offertaOfferente");
+               scambio.appendChild(offerta);
+
+               Element nomeRadice=document.createElement("nomeRadice");
+               offerta.appendChild(nomeRadice);
+               nomeRadice.appendChild(document.createTextNode(offerente.getNomeRadice()));
+
+               Element nomeCategoria=document.createElement("nomeCategoria");
+               offerta.appendChild(nomeCategoria);
+               nomeCategoria.appendChild(document.createTextNode(offerente.getNomeCategoria()));
+
+               Element statoAttuale= document.createElement("statoAttuale");
+               offerta.appendChild(statoAttuale);
+               statoAttuale.appendChild(document.createTextNode(offerente.getStatoAttuale().toStringStato()));
+
+               Element nomeFruitore=document.createElement("nomeFruitore");
+               offerta.appendChild(nomeFruitore);
+               nomeFruitore.appendChild(document.createTextNode(offerente.getNomeFruitore()));
+
+               Element compilazioni=document.createElement("compilazioni");
+               offerta.appendChild(compilazioni);
+
+               for(CampoNativo c: offerente.getCompliazioni().keySet()){
+                   Element compilazione = document.createElement("compilazione");
+                   compilazioni.appendChild(compilazione);
+                   //campoNativo
+                   Element campoNativo=document.createElement("campoNativo");
+                   compilazione.appendChild(campoNativo);
+
+                   //nome campo nativo
+                   Element nomeCampo=document.createElement("nomeCampo");
+                   campoNativo.appendChild(nomeCampo);
+                   nomeCampo.appendChild(document.createTextNode(c.getNomeCampo()));
+
+                   //obbligo descrzione campo
+                   Element obbligoCampo=document.createElement("obbligoCampo");
+                   campoNativo.appendChild(obbligoCampo);
+                   if(c.isObbligatoria()){
+                       obbligoCampo.appendChild(document.createTextNode("true"));
+                   }
+                   else {
+                       obbligoCampo.appendChild(document.createTextNode("false"));
+                   }
+                   Element compilazioneInserita=document.createElement("compilazioneInserita");
+                   compilazione.appendChild(compilazioneInserita);
+                   compilazioneInserita.appendChild(document.createTextNode(offerente.getCompliazioni().get(c)));
+
+               }
+               Element statiPassati=document.createElement("statiPassati");
+               offerta.appendChild(statiPassati);
+
+               for(StatoOfferta s:offerente.getStatiPassati()){
+                   Element st=document.createElement("statoPassato");
+                   statiPassati.appendChild(st);
+                   st.appendChild(document.createTextNode(s.toStringStato()));
+               }
+                //offerta ricevente
+               Offerta ricevente=sca.getRicevente();
+               Element offertaRicevente=document.createElement("offertaRicevente");
+               scambio.appendChild(offertaRicevente);
+
+               Element nomeRadiceRicevente=document.createElement("nomeRadice");
+               offertaRicevente.appendChild(nomeRadiceRicevente);
+               nomeRadiceRicevente.appendChild(document.createTextNode(ricevente.getNomeRadice()));
+
+               Element nomeCategoriaRicevente=document.createElement("nomeCategoria");
+               offertaRicevente.appendChild(nomeCategoriaRicevente);
+               nomeCategoriaRicevente.appendChild(document.createTextNode(ricevente.getNomeCategoria()));
+
+               Element statoAttualeRicevente= document.createElement("statoAttuale");
+               offertaRicevente.appendChild(statoAttualeRicevente);
+               statoAttualeRicevente.appendChild(document.createTextNode(ricevente.getStatoAttuale().toStringStato()));
+
+               Element nomeFruitoreRicevente=document.createElement("nomeFruitore");
+               offertaRicevente.appendChild(nomeFruitoreRicevente);
+               nomeFruitoreRicevente.appendChild(document.createTextNode(ricevente.getNomeFruitore()));
+
+               Element compilazioniRicevente=document.createElement("compilazioni");
+               offertaRicevente.appendChild(compilazioniRicevente);
+
+               for(CampoNativo c: ricevente.getCompliazioni().keySet()){
+                   Element compilazione = document.createElement("compilazione");
+                   compilazioniRicevente.appendChild(compilazione);
+                   //campoNativo
+                   Element campoNativo=document.createElement("campoNativo");
+                   compilazione.appendChild(campoNativo);
+
+                   //nome campo nativo
+                   Element nomeCampo=document.createElement("nomeCampo");
+                   campoNativo.appendChild(nomeCampo);
+                   nomeCampo.appendChild(document.createTextNode(c.getNomeCampo()));
+
+                   //obbligo descrzione campo
+                   Element obbligoCampo=document.createElement("obbligoCampo");
+                   campoNativo.appendChild(obbligoCampo);
+                   if(c.isObbligatoria()){
+                       obbligoCampo.appendChild(document.createTextNode("true"));
+                   }
+                   else {
+                       obbligoCampo.appendChild(document.createTextNode("false"));
+                   }
+                   Element compilazioneInserita=document.createElement("compilazioneInserita");
+                   compilazione.appendChild(compilazioneInserita);
+                   compilazioneInserita.appendChild(document.createTextNode(ricevente.getCompliazioni().get(c)));
+
+               }
+               Element statiPassatiRicevente=document.createElement("statiPassati");
+               offertaRicevente.appendChild(statiPassatiRicevente);
+
+               for(StatoOfferta s:ricevente.getStatiPassati()){
+                   Element st=document.createElement("statoPassato");
+                   statiPassatiRicevente.appendChild(st);
+                   st.appendChild(document.createTextNode(s.toStringStato()));
+               }
+               Element proposta=document.createElement("proposta");
+               scambio.appendChild(proposta);
+               if(sca.getUltimaProposta()!=null){
+
+                   Element luogo=document.createElement("luogo");
+                   proposta.appendChild(luogo);
+                   if(sca.getUltimaProposta()==null)
+                       luogo.appendChild(document.createTextNode(""));
+                   else{
+                       luogo.appendChild(document.createTextNode(sca.getUltimaProposta().getLuogo()));
+                   }
+
+                   Element data=document.createElement("data");
+                   proposta.appendChild(data);
+                   if(sca.getUltimaProposta()==null)
+                       data.appendChild(document.createTextNode(""));
+                   else
+                       data.appendChild(document.createTextNode(sca.getUltimaProposta().getData()));
+
+                   Element nomeF=document.createElement("nomeF");
+                   if(sca.getUltimaProposta()==null)
+                       nomeF.appendChild(document.createTextNode(""));
+                   else
+                       nomeF.appendChild(document.createTextNode(sca.getUltimaProposta().getNomeFruitore()));
+                   proposta.appendChild(nomeF);
+
+
+                   Element tempoProposta=document.createElement("tempoProposta");
+                   proposta.appendChild(tempoProposta);
+                   if(sca.getUltimaProposta()==null)
+                       tempoProposta.appendChild(document.createTextNode(""));
+                   else
+                       tempoProposta.appendChild(document.createTextNode(Long.toString(sca.getUltimaProposta().getTempo())));
+
+                   Element oraProposta=document.createElement("ora");
+                   proposta.appendChild(oraProposta);
+                   if(sca.getUltimaProposta()==null)
+                       oraProposta.appendChild(document.createTextNode(""));
+                   else
+                       oraProposta.appendChild(document.createTextNode(sca.getUltimaProposta().getOra().toStringOrario()));
+               }
+
+
+               Element timeIstant=document.createElement("time");
+               scambio.appendChild(timeIstant);
+               timeIstant.appendChild(document.createTextNode(Long.toString(sca.getTempo())));
+           }
+
+            Transformer transformer2 = TransformerFactory.newInstance().newTransformer();
+            Result output = new StreamResult(new File(filename));
+            Source input = new DOMSource(document);
+            transformer2.transform(input, output);
+        } catch (TransformerConfigurationException transformerConfigurationException) {
+            transformerConfigurationException.printStackTrace();
+        } catch (ParserConfigurationException parserConfigurationException) {
+            parserConfigurationException.printStackTrace();
+        } catch (TransformerException transformerException) {
+            transformerException.printStackTrace();
+        }
+        }
+
 }

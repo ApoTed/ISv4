@@ -92,4 +92,12 @@ public class PropostaIncontro {
     public String getNomeFruitore() {
         return nomeFruitore;
     }
+
+    public Orario getOra() {
+        return ora;
+    }
+
+    public String getData() {
+        return data;
+    }
 }

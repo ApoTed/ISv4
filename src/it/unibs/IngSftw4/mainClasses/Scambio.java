@@ -38,8 +38,8 @@ public class Scambio {
                 vorrei=possibiliScambi.scegliOfferta();
                 tutteLeOfferte.modificaOffertaEsistente(vorrei, StatoOfferta.SELEZIONATA);
                 vorrei.cambiaStato(StatoOfferta.SELEZIONATA);
-                tutteLeOfferte.modificaOffertaEsistente(daScambiare, StatoOfferta.ACCOPIATA);
-                daScambiare.cambiaStato(StatoOfferta.ACCOPIATA);
+                tutteLeOfferte.modificaOffertaEsistente(daScambiare, StatoOfferta.ACCOPPIATA);
+                daScambiare.cambiaStato(StatoOfferta.ACCOPPIATA);
                 PropostaIncontro p=null;
                 long timeNow= Calendar.getInstance().getTimeInMillis();
                 toRet=new Scambio(daScambiare,vorrei,p,timeNow);
@@ -62,7 +62,7 @@ public class Scambio {
      */
     public int statoScambio(){
         int stato=0;
-        if(offerente.getStatoAttuale()==StatoOfferta.ACCOPIATA && ricevente.getStatoAttuale()==StatoOfferta.SELEZIONATA){
+        if(offerente.getStatoAttuale()==StatoOfferta.ACCOPPIATA && ricevente.getStatoAttuale()==StatoOfferta.SELEZIONATA){
             stato=0;
         }
         else if(offerente.getStatoAttuale()==StatoOfferta.INSCAMBIO && ricevente.getStatoAttuale()==StatoOfferta.INSCAMBIO){
@@ -95,17 +95,22 @@ public class Scambio {
                 }
                 break;
             case 1:
-                System.out.println("L'ultima proposta di incontro è questa: \n"+this.ultimaProposta.visualizzaProposta());
-                int scelta=Utilita.leggiIntero("Se vuoi accettare questo incontro premi 1, se vuoi proporne un altro premi 2, se vuoi non rispondere premi 0",0,2);
-                if(scelta!=0){
-                    if(scelta==1){
-                        System.out.println("Lo scambio avverrà come scritto nella proposta che hai accettato: \n"+this.ultimaProposta.visualizzaProposta());
-                        this.ricevente.cambiaStato(StatoOfferta.CHIUSA);
-                        this.ricevente.cambiaStato(StatoOfferta.CHIUSA);
-                    }
-                    else{
-                        if(scelta==2){
-                            this.cambiaProposta(PropostaIncontro.creaProposta(f.getUsername(),ps));
+                if(this.ultimaProposta.getNomeFruitore().equals(f.getUsername())){
+                    System.out.println("L'altro fruitore non ha neanche ora risposta ala tua proposta di incontro");
+                }
+                else{
+                    System.out.println("L'ultima proposta di incontro è questa: \n"+this.ultimaProposta.visualizzaProposta());
+                    int scelta=Utilita.leggiIntero("Se vuoi accettare questo incontro premi 1, se vuoi proporne un altro premi 2, se vuoi non rispondere premi 0",0,2);
+                    if(scelta!=0){
+                        if(scelta==1){
+                            System.out.println("Lo scambio avverrà come scritto nella proposta che hai accettato: \n"+this.ultimaProposta.visualizzaProposta());
+                            this.ricevente.cambiaStato(StatoOfferta.CHIUSA);
+                            this.ricevente.cambiaStato(StatoOfferta.CHIUSA);
+                        }
+                        else{
+                            if(scelta==2){
+                                this.cambiaProposta(PropostaIncontro.creaProposta(f.getUsername(),ps));
+                            }
                         }
                     }
                 }
@@ -140,6 +145,14 @@ public class Scambio {
 
     public Offerta getRicevente() {
         return ricevente;
+    }
+
+    public PropostaIncontro getUltimaProposta() {
+        return ultimaProposta;
+    }
+
+    public long getTempo() {
+        return tempo;
     }
 
     /**

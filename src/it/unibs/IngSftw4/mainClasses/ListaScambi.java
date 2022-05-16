@@ -75,4 +75,8 @@ public class ListaScambi {
     public ArrayList<Scambio> getScambi() {
         return scambi;
     }
+    public void aggiornaScambio(Scambio sca, int index){
+        this.scambi.remove(index);
+        this.scambi.add(sca);
+    }
 }

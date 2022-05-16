@@ -183,9 +183,10 @@ public class Menu {
                         ListaScambi fatti=listascambi.scambiOfferente(f);
                         if(fatti.getScambi().size()>0){
                             Scambio scambioScelto=fatti.scegliScambio();
+                            int index=listascambi.getScambi().indexOf(scambioScelto);
                             if(scambioScelto!=null){
                                 scambioScelto.gestisciScambio(f,conf.getParametri());
-                                listascambi.addScambio(scambioScelto);
+                                listascambi.aggiornaScambio(scambioScelto,index);
                             }
                             else
                                 break;
@@ -199,9 +200,10 @@ public class Menu {
                         ListaScambi ricevuti=listascambi.scambiRicevente(f);
                         if(ricevuti.getScambi().size()>0){
                             Scambio scambioScelto=ricevuti.scegliScambio();
+                            int index=listascambi.getScambi().indexOf(scambioScelto);
                             if(scambioScelto!=null){
                                 scambioScelto.gestisciScambio(f,conf.getParametri());
-                                listascambi.addScambio(scambioScelto);
+                                listascambi.aggiornaScambio(scambioScelto,index);
                             }
                             else
                                 break;

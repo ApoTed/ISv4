@@ -24,6 +24,12 @@ public class main {
         if(fileUtenti.exists() && !fileUtenti.isDirectory()) {
             x=XmlReader.leggiUtenti("listaUtenti.xml");
         }
+        File fileScambi=new File("scambi.xml");
+        ArrayList<Scambio> ls=new ArrayList<>();
+        ListaScambi scambi=new ListaScambi(ls);
+        if(fileScambi.exists() && !fileScambi.isDirectory()){
+           scambi=XmlReader.leggiScambi("scambi.xml");
+        }
         Utente acceduto=x.menuAccesso();
         ArrayList <Gerarchia> gs=new ArrayList<>();
         Sistema sistema=new Sistema(gs);
@@ -44,19 +50,16 @@ public class main {
             param=ParametriScambi.inserimentoParametri();
         }
         Configurazione conf=new Configurazione(sistema,param);
-
         ArrayList <Offerta> listaOff=new ArrayList<>();
-
         File fileOfferte = new File("offerte.xml");
         if(fileOfferte.exists() && !fileOfferte.isDirectory()) {
             listaOff.addAll(XmlReader.leggiOfferte("offerte.xml").getListaOfferte());
         }
-        Offerte offerte=new Offerte(listaOff);
-        ArrayList<Scambio> ls=new ArrayList<>();
-        ListaScambi scambi=new ListaScambi(ls);
-        if(ls.size()!=0){
-            scambi.controllaValiditaScambi(conf.getParametri());
+        if(scambi!=null){
+            if(scambi.getScambi().size()>0)
+                scambi.controllaValiditaScambi(conf.getParametri());
         }
+        Offerte offerte=new Offerte(listaOff);
         //PropostaIncontro p=PropostaIncontro.creaProposta(acceduto.getUsername(), conf.getParametri());
         if(acceduto instanceof Configuratore){
             String titolo="Benvenuto nel sistema di gestione baratti";
@@ -71,6 +74,7 @@ public class main {
             Menu m=new Menu(titolo,voci);
             m.MenuFruitore(conf, (Fruitore) acceduto, offerte,scambi);
         }
+        XmlWriter.scriviScambi(scambi,"scambi.xml");
         System.out.println("\nFINE PROGRAMMA");
         if(offerte.getListaOfferte().size()!=0)
             XmlWriter.salvaOfferte(offerte, "offerte.xml");
