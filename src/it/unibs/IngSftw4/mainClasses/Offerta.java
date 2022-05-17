@@ -64,7 +64,7 @@ public class Offerta {
                 successo=true;
             }
             else{
-                int temp=Utilita.leggiIntero("La categoria inserita non esiste, se vuoi riprovare premi 1 altrimenti 0:",0,1);
+                int temp=Utilita.leggiIntero("La categoria inserita non esiste o non è una foglia, se vuoi riprovare premi 1 altrimenti 0:",0,1);
                 if(temp==0)
                     continua=false;
             }
