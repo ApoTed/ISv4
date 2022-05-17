@@ -159,5 +159,18 @@ public class Sistema {
         return questaRadice;
     }
 
+    public boolean isFoglia(String nomeCat){
+        ArrayList <Categoria> foglie=new ArrayList<>();
+        boolean isFoglia=false;
+        for(Gerarchia g:this.listaGerarchie){
+            foglie.addAll(g.listaFoglie());
+        }
+        for(Categoria c:foglie){
+            if(c.getNome().equals(nomeCat))
+                isFoglia=true;
+        }
+        return isFoglia;
+    }
+
 }
 

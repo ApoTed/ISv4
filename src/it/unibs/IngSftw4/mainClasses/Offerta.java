@@ -53,7 +53,7 @@ public class Offerta {
             int ger=Utilita.leggiIntero("Inserisci il numero della gerarchia dove si trova la categoria scelta:",1,s.getListaGerarchie().size());
             String n=Utilita.leggiStringaNonVuota("Inserisci il nome della categoria dove vuoi pubblicare il tuo articolo: ");
             Categoria c=s.findCategoria(n,ger);
-            if(c!=null){
+            if(c!=null && s.isFoglia(c.getNome())){
                 this.nomeRadice=s.getListaGerarchie().get(ger-1).getRadice().getNome();
                 this.nomeCategoria=c.getNome();
                 this.compilaCampi(c);

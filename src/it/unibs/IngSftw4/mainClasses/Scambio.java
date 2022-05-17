@@ -46,7 +46,7 @@ public class Scambio {
                 System.out.println("Scambio creato correttamente");
             }
             else{
-                System.out.println("Non ci sono offerte con cui poter effettuare uno scambio data l'ooferta selezionata");
+                System.out.println("Non ci sono offerte con cui poter effettuare uno scambio data l'of7ferta selezionata");
             }
         }
         else{
