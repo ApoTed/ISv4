@@ -676,6 +676,12 @@ public class XmlReader {
         return ofs;
     }
 
+    /**
+     * metodo per leggere gli scambi salvati in xml
+     * @param filename nome del file xml
+     * @return ListScambi
+     * @throws XMLStreamException
+     */
     public static ListaScambi leggiScambi(String filename) throws XMLStreamException {
 
         ArrayList<Scambio> scambi=new ArrayList<>();
