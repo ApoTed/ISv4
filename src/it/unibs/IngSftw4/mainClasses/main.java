@@ -78,7 +78,9 @@ public class main {
         System.out.println("\nFINE PROGRAMMA");
         if(offerte.getListaOfferte().size()!=0)
             XmlWriter.salvaOfferte(offerte, "offerte.xml");
-        XmlWriter.salvaParametri(conf.getParametri(),"parametriSalvati.xml");
+        if(conf.getSis().getListaGerarchie().size()!=0){
+            XmlWriter.salvaSistema(conf.getSis(), "sistema.xml");
+        }
         if(conf.getSis().getListaGerarchie().size()!=0){
             XmlWriter.salvaSistema(conf.getSis(), "sistema.xml");
         }
