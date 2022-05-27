@@ -11,7 +11,7 @@ public class DatiUtenti {
     public static final String CATEGORIA_NON_PRESENTE = "Categoria non presente";
     public static final String INSERISCI_NOME = "Inserisci il tuo nome: ";
     public static final String INSERISCI_PASSWORD = "Inserisci la tua password: ";
-    public static final Utente CREDENZIALI_PREDEFINITE = new Configuratore("bello", "12");
+    public static final Utente CREDENZIALI_PREDEFINITE = new Configuratore("UserStandard", "PasswordStandard");
     public static final String NOME_NON_DISPONIBILE = "Questo nome utente non è disponibile";
     public static final String NUOVA_PASSWORD = "Inserisci la tua nuova password";
     private ArrayList<Utente> listaUtenti = new ArrayList<Utente>();
@@ -29,85 +29,68 @@ public class DatiUtenti {
 
     /**
      * Metodo per la gestione dell'accesso
-     *
      * @return l'utente che ha eseguito correttamente l'accesso, null se l'accesso è fallito
      */
     public Utente menuAccesso() {
-        boolean successo = false;
+        boolean successo=false;
         //chiedi se è un nuovo fruitore
-        //fruitore inserisci le tue nove credeziali
-        int scelta = Utilita.leggiIntero("Inserisci 1 se sei un nuovo fruitore e vuoi registrarti, 0 altrimenti: ", 0, 1);
-        String username = null;
-        String password = null;
-        if (scelta == 1) {
-            do {
-                username = Utilita.leggiStringaNonVuota("Inserisci il nome con cui vuoi registrarti");
-                if (this.checkName(username)) {
+        //fruitore inserisci le tue nove credenziali
+        int scelta=Utilita.leggiIntero("Inserisci 1 se sei un nuovo fruitore e vuoi registrarti, 0 altrimenti: ",0,1);
+        String username=null;
+        String password=null;
+        if(scelta==1){
+            do{
+                username=Utilita.leggiStringaNonVuota("Inserisci il nome con cui vuoi registrarti");
+                if(this.checkName(username)){
                     System.out.println(NOME_NON_DISPONIBILE);
                 }
-            } while (this.checkName(username));
-            password = Utilita.leggiStringaNonVuota(NUOVA_PASSWORD);
-            this.addUtente(username, password, false);
-        } else {
-            username = Utilita.leggiStringaNonVuota("Benvenuto " + INSERISCI_NOME);
-            password = Utilita.leggiStringaNonVuota(INSERISCI_PASSWORD);
+            }while(this.checkName(username));
+            password=Utilita.leggiStringaNonVuota(NUOVA_PASSWORD);
+            this.addUtente(username,password,false);
         }
-        Utente temp = new Utente(username, password);
-        if (this.checkConf(temp)) {
-            String newUsername;
-            do {
-                newUsername = Utilita.leggiStringaNonVuota("Inserisci il tuo nuovo nome utente");
-                if (this.checkName(newUsername) == true)
-                    System.out.println(NOME_NON_DISPONIBILE);
-            } while (this.checkName(newUsername) == true);
-
-            String newPassword = Utilita.leggiStringaNonVuota(NUOVA_PASSWORD);
-            this.addUtente(newUsername, newPassword, true);
-            temp = new Configuratore(newUsername, newPassword);
+        else{
+            username=Utilita.leggiStringaNonVuota("Benvenuto "+ INSERISCI_NOME);
+            password=Utilita.leggiStringaNonVuota(INSERISCI_PASSWORD);
+        }
+        Utente temp= new Utente(username, password);
+        if( this.checkConf(temp)) {
+            temp = nuovoConfiguratore();
 
         }
-        for (int i = 0; i < 3; i++) {
+        for (int i=0;i<3;i++) {
             //accesso da utente già registrato 3 tentativi
             int tentativi = 2 - i;
-            if (tentativi < 2) {
-                String nameTry = Utilita.leggiStringaNonVuota(INSERISCI_NOME);
-                String passwordTry = Utilita.leggiStringaNonVuota(INSERISCI_PASSWORD);
-                temp = new Utente(nameTry, passwordTry);
-                if (this.checkConf(temp)) {
-                    String newUsername;
-                    do {
-                        newUsername = Utilita.leggiStringaNonVuota("Inserisci il tuo nuovo nome utente");
-                        if (this.checkName(newUsername) == true)
-                            System.out.println(NOME_NON_DISPONIBILE);
-                    } while (this.checkName(newUsername) == true);
-
-                    String newPassword = Utilita.leggiStringaNonVuota(NUOVA_PASSWORD);
-                    this.addUtente(newUsername, newPassword, true);
-                    temp = new Configuratore(newUsername, newPassword);
+            if(tentativi<2){
+                String nameTry=Utilita.leggiStringaNonVuota(INSERISCI_NOME);
+                String passwordTry=Utilita.leggiStringaNonVuota(INSERISCI_PASSWORD);
+                temp=new Utente(nameTry, passwordTry);
+                if( this.checkConf(temp)) {
+                    temp = nuovoConfiguratore();
 
                 }
 
             }
             for (Utente toCompare : this.getListaUtenti()) {
-                if (Utente.sameUtente(toCompare, temp)) {
-                    successo = true;
+                if( Utente.sameUtente(toCompare, temp)) {
+                    successo=true;
                 }
 
             }
-            if (successo == false) {
+            if(successo==false) {
 
                 System.out.println("Le credenziali inserite non sono corrette, hai " + tentativi + " tentativi");
             }
-            if (successo == true)
+            if(successo==true)
                 break;
 
         }
-        if (successo == false) {
+        if(successo==false) {
             System.out.println("Accesso fallito chiudere il programma");
-            temp = null;
-        } else {
+            temp=null;
+        }
+        else {
             System.out.println("Accesso eseguito con successo");
-            temp = this.getUtenteDaCredenziali(temp.getUsername(), temp.getPassword());
+            temp=this.getUtenteDaCredenziali(temp.getUsername(), temp.getPassword());
 
         }
         return temp;
@@ -131,6 +114,25 @@ public class DatiUtenti {
         }
 
         return presente;
+    }
+
+    /**
+     * Metodo che restituisce un nuovo configuratore che si registra al sistema
+     * @return il nuovo configuratore con credenziali inserite da tastiera
+     */
+    public Utente nuovoConfiguratore() {
+        Utente temp;
+        String newUsername;
+        do {
+            newUsername=Utilita.leggiStringaNonVuota("Inserisci il tuo nuovo nome utente:");
+            if(this.checkName(newUsername)==true)
+                System.out.println("Questo nome utente non è disponibile");
+        }while(this.checkName(newUsername)==true);
+
+        String newPassword=Utilita.leggiStringaNonVuota("Inserisci la tua nuova password:");
+        this.addUtente(newUsername, newPassword, true);
+        temp=new Configuratore(newUsername, newPassword);
+        return temp;
     }
 
     /**
