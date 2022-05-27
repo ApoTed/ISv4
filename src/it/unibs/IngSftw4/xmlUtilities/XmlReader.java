@@ -1057,6 +1057,7 @@ public class XmlReader {
                                                         xmlr.next();
                                                         tempoProp=xmlr.getText();
                                                         xmlr.next();
+                                                        break;
                                                     case "ora":
                                                         xmlr.next();
                                                         ora=xmlr.getText();

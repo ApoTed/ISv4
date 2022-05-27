@@ -102,6 +102,39 @@ public class Offerta {
         this.statiPassati.add(this.statoAttuale);
         this.statoAttuale=so;
     }
+    public boolean confrontaOfferta(Offerta toCompare){
+        boolean uguale=false;
+        if(this.nomeCategoria.equals(toCompare.getNomeCategoria()) && this.nomeRadice.equals(toCompare.nomeRadice)){
+            if(this.nomeFruitore.equals(toCompare.nomeFruitore)){
+                boolean temp=false;
+                ArrayList <String> compilazioniConNome=new ArrayList<>();
+                for(CampoNativo cTemp: this.compliazioni.keySet()){
+                    StringBuffer sb=new StringBuffer();
+                    sb.append(cTemp.getNomeCampo());
+                    sb.append(this.compliazioni.get(cTemp));
+                    compilazioniConNome.add(sb.toString());
+                    //devi salvare in un arrayList le compilazioni e le rispettive scritte perchè non sono nello stesso ordine, oppure usare come key il nome della stesa compilazione
+
+                }
+                int count=0;
+                for(CampoNativo cToCompare: toCompare.compliazioni.keySet()){
+                    StringBuffer sb2=new StringBuffer();
+                    sb2.append(cToCompare.getNomeCampo());
+                    sb2.append(toCompare.compliazioni.get(cToCompare));
+                    String ts=sb2.toString();
+                    if(compilazioniConNome.contains(ts)){
+                        count++;
+                    }
+                }
+                if(count==compilazioniConNome.size())
+                    temp=true;
+                if(temp==true){
+                    uguale=true;
+                }
+            }
+        }
+        return uguale;
+    }
 
     /**
      * Metodo get per il nome della radice

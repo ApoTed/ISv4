@@ -75,13 +75,15 @@ public class main {
             m.MenuFruitore(conf, (Fruitore) acceduto, offerte,scambi);
         }
         XmlWriter.scriviScambi(scambi,"scambi.xml");
-        System.out.println("\nFINE PROGRAMMA");
+
         if(offerte.getListaOfferte().size()!=0)
             XmlWriter.salvaOfferte(offerte, "offerte.xml");
+
         XmlWriter.salvaParametri(conf.getParametri(),"parametriSalvati.xml");
         if(conf.getSis().getListaGerarchie().size()!=0){
             XmlWriter.salvaSistema(conf.getSis(), "sistema.xml");
         }
         XmlWriter.utentiWrite(x, "listaUtenti.xml");
+        System.out.println("\nFINE PROGRAMMA");
     }
 }

@@ -72,7 +72,13 @@ public class CampoNativo {
             str.append(" compliazione facoltativa\n");
         return str.toString();
     }
-    //public ArrayList<String> nomiCampi(CampoNativo c)//metodo per ottenre solo la lista di nomi dei campi
+
+    public boolean compareCampo(CampoNativo c){
+        boolean uguali=false;
+        if(this.nomeCampo.equals(c.nomeCampo) && this.obbligatoria==c.obbligatoria)
+            uguali=true;
+        return uguali;
+    }
 
     /**
      * Metodo per ottenere un boolean che è true se è obbligatorio false altrimenti

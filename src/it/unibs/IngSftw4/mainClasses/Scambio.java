@@ -76,7 +76,7 @@ public class Scambio {
         }
         return stato;
     }
-    public void gestisciScambio(Fruitore f, ParametriScambi ps){
+    public void gestisciScambio(Fruitore f, ParametriScambi ps,Offerte offerte){
         switch (this.statoScambio()){
             case 0:
                 if(f.getUsername().equals(offerente.getNomeFruitore())){
@@ -90,6 +90,8 @@ public class Scambio {
                         this.cambiaProposta(nuovaPropposta);
                         this.ricevente.cambiaStato(StatoOfferta.INSCAMBIO);
                         this.offerente.cambiaStato(StatoOfferta.INSCAMBIO);
+                        offerte.modificaOffertaEsistente(offerente, StatoOfferta.INSCAMBIO);
+                        offerte.modificaOffertaEsistente(ricevente, StatoOfferta.INSCAMBIO);
                         this.tempo=nuovaPropposta.getTempo();
                 }
                 }
@@ -105,7 +107,9 @@ public class Scambio {
                         if(scelta==1){
                             System.out.println("Lo scambio avverrà come scritto nella proposta che hai accettato: \n"+this.ultimaProposta.visualizzaProposta());
                             this.ricevente.cambiaStato(StatoOfferta.CHIUSA);
-                            this.ricevente.cambiaStato(StatoOfferta.CHIUSA);
+                            this.offerente.cambiaStato(StatoOfferta.CHIUSA);
+                            offerte.modificaOffertaEsistente(ricevente, StatoOfferta.CHIUSA);
+                            offerte.modificaOffertaEsistente(offerente, StatoOfferta.CHIUSA);
                         }
                         else{
                             if(scelta==2){

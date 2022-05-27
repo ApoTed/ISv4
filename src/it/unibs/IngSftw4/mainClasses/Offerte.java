@@ -85,11 +85,14 @@ public class Offerte {
      * @param toChange offerta di cui si vuole cambiare lo stato
      */
     public void modificaOffertaEsistente(Offerta toChange, StatoOfferta so){
-        int indice=this.listaOfferte.indexOf(toChange);
-        Offerta temp=this.listaOfferte.get(indice);
-        temp.cambiaStato(so);
-        this.listaOfferte.remove(indice);
-        this.listaOfferte.add(temp);
+        Offerta temp=null;
+        for(Offerta o:this.listaOfferte){
+            if(o.confrontaOfferta(toChange)){
+                temp=o;
+            }
+        }
+        this.listaOfferte.remove(temp);
+        this.listaOfferte.add(toChange);
     }
 
     /**
@@ -124,6 +127,20 @@ public class Offerte {
             ret.togliRitirate();
         }
         return ret;
+    }
+
+    /**
+     * metodo che restituisce solo le offerte seleziona, accopiate o chiuse
+     * @return
+     */
+    public Offerte offerteScambiate(){
+        ArrayList <Offerta> temp=new ArrayList<>();
+        for(Offerta o:this.listaOfferte){
+            if(o.getStatoAttuale()==StatoOfferta.CHIUSA || o.getStatoAttuale()==StatoOfferta.INSCAMBIO || o.getStatoAttuale()==StatoOfferta.SELEZIONATA || o.getStatoAttuale()==StatoOfferta.ACCOPPIATA){
+                temp.add(o);
+            }
+        }
+        return new Offerte(temp);
     }
 
     /**
