@@ -110,7 +110,8 @@ public class Menu {
                     break;
                 case 5:
                     Categoria [] foglia=conf.getSis().scegliFoglia();
-                    Offerte daVedere=offerte.offerteFoglia(foglia[0].getNome(),foglia[1].getNome()).offerteScambiate();
+                    Offerte daVedere=offerte.offerteFoglia(foglia[0].getNome(),foglia[1].getNome());
+                    daVedere.offerteScambiate();
                     System.out.println(daVedere.toStringOfferte());
                     break;
                 default:
@@ -155,7 +156,7 @@ public class Menu {
                     break;
                 case 3:
                     Offerte offerteFruitore= new Offerte(offerte.getOfferteFromFruitore(f.getUsername()));
-                    offerteFruitore.togliRitirate();
+                    offerteFruitore.tieniAperte();
                     if(offerteFruitore.getListaOfferte().size()>0){
                         Offerta toChange=offerteFruitore.scegliOfferta();
                         int sceltaSicura=Utilita.leggiIntero("Premi 1 se sei sicuro di cancellare tale offerta altrimenti 0",0,1);

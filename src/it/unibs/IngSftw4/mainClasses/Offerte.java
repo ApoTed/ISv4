@@ -98,10 +98,10 @@ public class Offerte {
     /**
      * metodo che elimina le offerte nell statoOfferta RITIRATA
      */
-    public void togliRitirate(){
+    public void tieniAperte(){
         ArrayList <Offerta> temp=new ArrayList<>();
         for(Offerta o: this.listaOfferte){
-            if(o.getStatoAttuale()==StatoOfferta.APERTA.APERTA){
+            if(o.getStatoAttuale()==StatoOfferta.APERTA){
                 temp.add(o);
             }
         }
@@ -123,24 +123,22 @@ public class Offerte {
             }
         }
         Offerte ret=new Offerte(toRet);
-        if(!toRet.isEmpty()){
-            ret.togliRitirate();
-        }
+
         return ret;
     }
 
     /**
-     * metodo che restituisce solo le offerte seleziona, accopiate o chiuse
+     * metodo che restituisce solo le offerte selezionate, accopiate o chiuse
      * @return
      */
-    public Offerte offerteScambiate(){
+    public void offerteScambiate(){
         ArrayList <Offerta> temp=new ArrayList<>();
         for(Offerta o:this.listaOfferte){
-            if(o.getStatoAttuale()==StatoOfferta.CHIUSA || o.getStatoAttuale()==StatoOfferta.INSCAMBIO || o.getStatoAttuale()==StatoOfferta.SELEZIONATA || o.getStatoAttuale()==StatoOfferta.ACCOPPIATA){
+            if(o.getStatoAttuale()!=StatoOfferta.CHIUSA && o.getStatoAttuale()!=StatoOfferta.INSCAMBIO ){
                 temp.add(o);
             }
         }
-        return new Offerte(temp);
+        this.listaOfferte.removeAll(temp);
     }
 
     /**
@@ -175,7 +173,7 @@ public class Offerte {
         offerteScambiabili.addAll(this.offerteFoglia(daScambiare.getNomeCategoria(),daScambiare.getNomeRadice())
                 .getListaOfferte());
         Offerte of=new Offerte(offerteScambiabili);
-        of.togliRitirate();
+        of.tieniAperte();
         ArrayList <Offerta> papabili=new ArrayList<>();
         for(Offerta offerta: of.getListaOfferte()){
             if(!offerta.getNomeFruitore().equals(daScambiare.getNomeFruitore())){

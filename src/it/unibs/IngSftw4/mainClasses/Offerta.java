@@ -113,8 +113,6 @@ public class Offerta {
                     sb.append(cTemp.getNomeCampo());
                     sb.append(this.compliazioni.get(cTemp));
                     compilazioniConNome.add(sb.toString());
-                    //devi salvare in un arrayList le compilazioni e le rispettive scritte perchè non sono nello stesso ordine, oppure usare come key il nome della stesa compilazione
-
                 }
                 int count=0;
                 for(CampoNativo cToCompare: toCompare.compliazioni.keySet()){

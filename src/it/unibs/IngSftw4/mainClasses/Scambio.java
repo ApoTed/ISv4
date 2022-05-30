@@ -26,7 +26,7 @@ public class Scambio {
         System.out.println("Creazione di uno scambio\n");
         System.out.println("Scegli l'offerta che vuoi scambiare");
         Offerte offerteFruitore=new Offerte(tutteLeOfferte.getOfferteFromFruitore(f.getUsername()));
-        offerteFruitore.togliRitirate();
+        offerteFruitore.tieniAperte();
         Offerta daScambiare=null;
         Offerta vorrei=null;
         Scambio toRet=null;
