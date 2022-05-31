@@ -46,7 +46,7 @@ public class Scambio {
                 System.out.println("Scambio creato correttamente");
             }
             else{
-                System.out.println("Non ci sono offerte con cui poter effettuare uno scambio data l'of7ferta selezionata");
+                System.out.println("Non ci sono offerte con cui poter effettuare uno scambio data l'offerta selezionata");
             }
         }
         else{
@@ -84,7 +84,7 @@ public class Scambio {
                 }
                 else{
                     System.out.println("Ti è stato proposto di scambiare questa offerta:\n"+this.offerente.toStringOfferta()+"\nCon questa tua offerta: \n"+ricevente.toStringOfferta());
-                    int rispondi=Utilita.leggiIntero("Scrivi 1 se vuoi risponeder a questa offerta, 0 altrimenti",0,1);
+                    int rispondi=Utilita.leggiIntero("Scrivi 1 se vuoi rispondere a questa offerta, 0 altrimenti",0,1);
                     if(rispondi==1){
                         PropostaIncontro nuovaPropposta=PropostaIncontro.creaProposta(f.getUsername(),ps);
                         this.cambiaProposta(nuovaPropposta);
@@ -98,7 +98,7 @@ public class Scambio {
                 break;
             case 1:
                 if(this.ultimaProposta.getNomeFruitore().equals(f.getUsername())){
-                    System.out.println("L'altro fruitore non ha neanche ora risposta ala tua proposta di incontro");
+                    System.out.println("L'altro fruitore non ha ancora risposta alla tua proposta di incontro");
                 }
                 else{
                     System.out.println("L'ultima proposta di incontro è questa: \n"+this.ultimaProposta.visualizzaProposta());
@@ -166,9 +166,9 @@ public class Scambio {
     public String vediOfferteScambio(){
         StringBuffer sb=new StringBuffer();
         sb.append("Offerta offerente: \n");
-        sb.append(offerente.toStringOfferta());
+        sb.append(offerente.toStringOffertaConAutore());
         sb.append("\n\tOfferta con cui si vorrebbe effettuare lo scambio:\n");
-        sb.append(ricevente.toStringOfferta());
+        sb.append(ricevente.toStringOffertaConAutore());
         return sb.toString();
     }
 }
