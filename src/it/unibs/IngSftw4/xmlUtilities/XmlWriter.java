@@ -260,7 +260,7 @@ public class XmlWriter {
                 Element compilazioni=document.createElement("compilazioni");
                 offerta.appendChild(compilazioni);
 
-                for(CampoNativo c: x.getCompliazioni().keySet()){
+                for(CampoNativo c: x.getCompilazioni().keySet()){
                     Element compilazione = document.createElement("compilazione");
                     compilazioni.appendChild(compilazione);
                     //campoNativo
@@ -283,7 +283,7 @@ public class XmlWriter {
                     }
                     Element compilazioneInserita=document.createElement("compilazioneInserita");
                     compilazione.appendChild(compilazioneInserita);
-                    compilazioneInserita.appendChild(document.createTextNode(x.getCompliazioni().get(c)));
+                    compilazioneInserita.appendChild(document.createTextNode(x.getCompilazioni().get(c)));
 
                 }
                 Element statiPassati=document.createElement("statiPassati");
@@ -344,7 +344,7 @@ public class XmlWriter {
                Element compilazioni=document.createElement("compilazioni");
                offerta.appendChild(compilazioni);
 
-               for(CampoNativo c: offerente.getCompliazioni().keySet()){
+               for(CampoNativo c: offerente.getCompilazioni().keySet()){
                    Element compilazione = document.createElement("compilazione");
                    compilazioni.appendChild(compilazione);
                    //campoNativo
@@ -367,7 +367,7 @@ public class XmlWriter {
                    }
                    Element compilazioneInserita=document.createElement("compilazioneInserita");
                    compilazione.appendChild(compilazioneInserita);
-                   compilazioneInserita.appendChild(document.createTextNode(offerente.getCompliazioni().get(c)));
+                   compilazioneInserita.appendChild(document.createTextNode(offerente.getCompilazioni().get(c)));
 
                }
                Element statiPassati=document.createElement("statiPassati");
@@ -402,7 +402,7 @@ public class XmlWriter {
                Element compilazioniRicevente=document.createElement("compilazioni");
                offertaRicevente.appendChild(compilazioniRicevente);
 
-               for(CampoNativo c: ricevente.getCompliazioni().keySet()){
+               for(CampoNativo c: ricevente.getCompilazioni().keySet()){
                    Element compilazione = document.createElement("compilazione");
                    compilazioniRicevente.appendChild(compilazione);
                    //campoNativo
@@ -425,7 +425,7 @@ public class XmlWriter {
                    }
                    Element compilazioneInserita=document.createElement("compilazioneInserita");
                    compilazione.appendChild(compilazioneInserita);
-                   compilazioneInserita.appendChild(document.createTextNode(ricevente.getCompliazioni().get(c)));
+                   compilazioneInserita.appendChild(document.createTextNode(ricevente.getCompilazioni().get(c)));
 
                }
                Element statiPassatiRicevente=document.createElement("statiPassati");

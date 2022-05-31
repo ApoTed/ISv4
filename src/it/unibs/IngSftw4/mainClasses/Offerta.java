@@ -102,6 +102,12 @@ public class Offerta {
         this.statiPassati.add(this.statoAttuale);
         this.statoAttuale=so;
     }
+
+    /**
+     *
+     * @param toCompare
+     * @return
+     */
     public boolean confrontaOfferta(Offerta toCompare){
         boolean uguale=false;
         if(this.nomeCategoria.equals(toCompare.getNomeCategoria()) && this.nomeRadice.equals(toCompare.nomeRadice)){
@@ -168,7 +174,7 @@ public class Offerta {
     }
 
     /**
-     * metodo per visualizzare l'offerta e anche il realtivo autore
+     * Metodo per visualizzare l'offerta e anche il relativo autore
      * @return la stringa con le informazioni sull'offerta autore incluso
      */
     public String toStringOffertaConAutore(){
@@ -196,7 +202,7 @@ public class Offerta {
      * Metodo get per la HashMap delle compilazioni
      * @return la HashMap delle compilazioni
      */
-    public HashMap<CampoNativo, String> getCompliazioni() {
+    public HashMap<CampoNativo, String> getCompilazioni() {
         return compliazioni;
     }
     /**

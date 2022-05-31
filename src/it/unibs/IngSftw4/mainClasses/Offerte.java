@@ -3,14 +3,14 @@ package it.unibs.IngSftw4.mainClasses;
 import java.util.ArrayList;
 
 /**
- * classe per la gestione di tutte le offerte
+ * Classe per la gestione di tutte le offerte
  * @author Enrico Zambelli, Jacopo Tedeschi
  */
 public class Offerte {
     private ArrayList<Offerta> listaOfferte= new ArrayList<Offerta>();
 
     /**
-     * costruttore della calsse
+     * Costruttore della calsse
      * @param _offerteAccoppiate arraylist delle offerte
      */
     public Offerte( ArrayList<Offerta> _offerteAccoppiate) {
@@ -18,7 +18,7 @@ public class Offerte {
     }
 
     /**
-     * metodo che aggiunge un offerta alla liste delle offerte
+     * Metodo che aggiunge un offerta alla lista delle offerte
      * @param o offerta da aggiungere
      */
     public void addOffertaAunFruitore( Offerta o){
@@ -26,7 +26,7 @@ public class Offerte {
     }
 
     /**
-     * metodo che restituisce la lista delle offerte
+     * Metodo che restituisce la lista delle offerte
      * @return arraylist delle offerte
      */
     public ArrayList<Offerta> getListaOfferte() {
@@ -34,14 +34,14 @@ public class Offerte {
     }
 
     /**
-     * metodo che restituisce le offerte appartenenti ad un fruitore
-     * @param nomeFruiotore nome del fruitore di cui si vogliono le offerte
+     * Metodo che restituisce le offerte appartenenti ad un fruitore
+     * @param nomeFruitore nome del fruitore di cui si vogliono le offerte
      * @return arrayList di offerte che appartengono al fruitore dato
      */
-    public ArrayList<Offerta> getOfferteFromFruitore(String nomeFruiotore){
+    public ArrayList<Offerta> getOfferteFromFruitore(String nomeFruitore){
         ArrayList <Offerta> toReturn=new ArrayList<>();
         for(Offerta o: this.listaOfferte){
-            if(o.getNomeFruitore().equals(nomeFruiotore)){
+            if(o.getNomeFruitore().equals(nomeFruitore)){
                 toReturn.add(o);
             }
         }
@@ -49,7 +49,7 @@ public class Offerte {
     }
 
     /**
-     * metodo che retituisce una stringa con le informazioni di tutte le offerte
+     * Metodo che restituisce una stringa con le informazioni di tutte le offerte
      * @return String con informazioni sulle offerte
      */
     public  String toStringOfferte(){
@@ -70,7 +70,7 @@ public class Offerte {
     }
 
     /**
-     * metodo per scegliere un offerta
+     * Metodo per scegliere un offerta
      * @return Offerta scelta
      */
     public Offerta scegliOfferta(){
@@ -81,7 +81,7 @@ public class Offerte {
     }
 
     /**
-     * metodo per cambiare lo stato di una offerta esistente
+     * Metodo per cambiare lo stato di una offerta esistente
      * @param toChange offerta di cui si vuole cambiare lo stato
      */
     public void modificaOffertaEsistente(Offerta toChange, StatoOfferta so){
@@ -96,7 +96,7 @@ public class Offerte {
     }
 
     /**
-     * metodo che elimina le offerte nell statoOfferta RITIRATA
+     * Metodo che elimina le offerte nell statoOfferta RITIRATA
      */
     public void tieniAperte(){
         ArrayList <Offerta> temp=new ArrayList<>();
@@ -110,7 +110,7 @@ public class Offerte {
     }
 
     /**
-     * metodo per ottenere tutte le offerte realtive ad una categoria foglia
+     * Metodo per ottenere tutte le offerte relative a una categoria foglia
      * @param nomeFoglia nome della categoria foglia di cui si vogliono sapere le offerte
      * @param nomeRadice nome della radice della gerarchia
      * @return Offerte con tutte le offerte relative alla categoria
@@ -128,7 +128,7 @@ public class Offerte {
     }
 
     /**
-     * metodo che restituisce solo le offerte selezionate, accopiate o chiuse
+     * Metodo che restituisce solo le offerte in scambio o chiuse
      * @return
      */
     public void offerteScambiate(){
@@ -142,7 +142,7 @@ public class Offerte {
     }
 
     /**
-     * stampa tutte le offerte relative ad una categoria foglia da selezionare
+     * Metodo per la stampa tutte le offerte relative a una categoria foglia da selezionare
      * @param conf Configurazione contente il sistema
      */
     public void stampaOfferteFoglia(Configurazione conf){
@@ -154,7 +154,7 @@ public class Offerte {
                 System.out.println(tosee.toStringOfferte());
             }
             else{
-                System.out.println("non ci sono offerte aperte realtive a questa categoria");
+                System.out.println("Non ci sono offerte aperte relative a questa categoria");
             }
         }
         else{
@@ -163,7 +163,7 @@ public class Offerte {
     }
 
     /**
-     * metodo che restituisce le offerte con l'offerta daScambiare può proporre uno scambio
+     * Metodo che restituisce le offerte con l'offerta daScambiare può proporre uno scambio
      * @param daScambiare offerta di cui si vogliono le possibili offerte con cui scambiarla
      * @return le offerte  con cui si può fare lo scambio
      */
@@ -184,7 +184,7 @@ public class Offerte {
     }
 
     /**
-     * metodo che rimuove un offerta
+     * Metodo che rimuove un offerta
      * @param o offerta da rimuovere
      */
     public void togliOfferta(Offerta o){
