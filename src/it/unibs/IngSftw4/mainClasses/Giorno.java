@@ -76,6 +76,11 @@ public enum Giorno {
         }
         return null;
     }
+
+    /**
+     * Metodo che restituisce il giorno in base a un intero
+     * @return giorno corrispondente al numero passato in ingresso
+     */
     public int getNumFromDay(){
         int numOfTheWeek=0;
         switch(this){

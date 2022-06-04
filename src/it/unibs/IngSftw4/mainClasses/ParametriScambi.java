@@ -220,6 +220,10 @@ public class ParametriScambi {
 
     }
 
+    /**
+     * Metodo che restituisce una stringa relativa agli orari
+     * @return stringa relativa agli orari
+     */
     public String vediIntervalli(){
         StringBuffer sb=new StringBuffer();
         int count=0;
@@ -264,6 +268,10 @@ public class ParametriScambi {
             System.out.println("l'intervallo inserito non è presente");
     }
 
+    /**
+     * Metodo per la scelta del luogo
+     * @return
+     */
     public String scegliLuogo(){
         int count=1;
         for(String s:this.luoghi){

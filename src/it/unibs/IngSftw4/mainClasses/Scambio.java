@@ -1,22 +1,31 @@
 package it.unibs.IngSftw4.mainClasses;
 
 import java.util.Calendar;
-
+/**
+ * Classe per la gestione degli scambi
+ */
 public class Scambio {
     private Offerta offerente;
     private Offerta ricevente;
     private PropostaIncontro ultimaProposta;
     private long tempo;
 
-    public Scambio(Offerta _offerrente, Offerta _ricevente, PropostaIncontro _ultimaProposta,long _tempo){
-        offerente=_offerrente;
+    /**
+     * Costruttore della classe Scambio
+     * @param _offerente l'offerta dell'offerente
+     * @param _ricevente l'offerta del destinatario
+     * @param _ultimaProposta la proposta d'incontro più recente
+     * @param _tempo tempo passata dalla proposta
+     */
+    public Scambio(Offerta _offerente, Offerta _ricevente, PropostaIncontro _ultimaProposta,long _tempo){
+        offerente=_offerente;
         ricevente=_ricevente;
         ultimaProposta=_ultimaProposta;
         tempo=_tempo;
     }
 
     /**
-     * metodo per creare uno scambio
+     * Metodo per creare uno scambio
      * @param conf configurazione
      * @param tutteLeOfferte tutte le offerte presenti
      * @param f fruitore che propone lo scambio
@@ -56,7 +65,7 @@ public class Scambio {
     }
 
     /**
-     * metodo che restituisce un int in base allo stato dello scambio
+     * Metodo che restituisce un int in base allo stato dello scambio
      * @return 0 se non è neanche ora stata accettata l'offerta, 1 se è stato accettata e si stanno accordando sullo scambio
      * 2 se è scaduto il tempo e allora le offerte tornano aperte, 3 se i due fruitore si sono accordati sullo scambio
      */
@@ -76,6 +85,13 @@ public class Scambio {
         }
         return stato;
     }
+
+    /**
+     * Metodo per la gestione di uno scambio
+     * @param f il fruitore che controlla lo stato dello scambio
+     * @param ps parametri di scambio del sistema
+     * @param offerte offerte del sistema
+     */
     public void gestisciScambio(Fruitore f, ParametriScambi ps,Offerte offerte){
         switch (this.statoScambio()){
             case 0:
@@ -122,12 +138,16 @@ public class Scambio {
         }
     }
 
+    /**
+     * Metodo per settare l'ultima proposta d'incontro
+     * @param pi
+     */
     public void cambiaProposta(PropostaIncontro pi){
         this.ultimaProposta=pi;
     }
 
     /**
-     * metodo che controlla se uno scambio è scaduto e se lo è rimmette le offerte nello stato aperta
+     * Metodo che controlla se uno scambio è scaduto e se lo è rimette le offerte nello stato aperta
      * @param ps parametri scambi in cui c'è la scadenza degli scambi
      * @return true se è scaduto, false altrimenti
      */
@@ -143,24 +163,38 @@ public class Scambio {
         return scaduto;
     }
 
+    /**
+     * Metodo get per l'offerta dell'offerente
+     * @return l'offerta del offerente
+     */
     public Offerta getOfferente() {
         return offerente;
     }
-
+    /**
+     * Metodo get per l'offerta del destinatario
+     * @return l'offerta del destinatario
+     */
     public Offerta getRicevente() {
         return ricevente;
     }
-
+    /**
+     * Metodo get per l'ultima proposta d'incontro
+     * @return l'ultima proposta d'incontro
+     */
     public PropostaIncontro getUltimaProposta() {
         return ultimaProposta;
     }
 
+    /**
+     * Metodo get per il tempo trascorso dalla proposta di scambio
+     * @return
+     */
     public long getTempo() {
         return tempo;
     }
 
     /**
-     * metodo che restituisce una stringa con le informazioni relative alle offerte dello scambio
+     * Metodo che restituisce una stringa con le informazioni relative alle offerte dello scambio
      * @return stringa con le informazioni
      */
     public String vediOfferteScambio(){

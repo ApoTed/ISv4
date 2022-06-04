@@ -160,9 +160,9 @@ public class Sistema {
     }
 
     /**
-     *
-     * @param nomeCat
-     * @return
+     *Metodo per valutare se una categoria è foglia
+     * @param nomeCat nome della categoria da controllare
+     * @return true se è foglia, false altrimenti
      */
     public boolean isFoglia(String nomeCat){
         ArrayList <Categoria> foglie=new ArrayList<>();
