@@ -1,6 +1,9 @@
 package it.unibs.IngSftw4.mainClasses;
 
 
+import it.unibs.IngSftw4.xmlUtilities.XmlReader;
+
+import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -182,6 +185,22 @@ public class Utilita {
             meseGiorno.append(Integer.toString(giorno));
         return meseGiorno.toString();
     }
+     public static boolean exist(String fileName){
+         File fileUtenti = new File(fileName);
+         boolean esiste=false;
+         if(fileUtenti.exists() && !fileUtenti.isDirectory()) {
+             esiste=true;
+         }
+         return esiste;
+     }
+     public static boolean isXmlFile(String fileName){
+        boolean xml=false;
+        StringBuffer sb=new StringBuffer();
+        sb.append(fileName.substring(fileName.length()-3));
+        if(sb.equals("xml"))
+            xml=true;
+        return xml;
+     }
 
     /**
      * metodo che restituisce la differenza tra due istanti in giorni

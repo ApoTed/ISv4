@@ -453,7 +453,6 @@ public class XmlReader {
                                         xmlr.next();
                                     }
                                 }
-
                                 break;
                             case "scadenza":
                                 boolean fineScad=false;

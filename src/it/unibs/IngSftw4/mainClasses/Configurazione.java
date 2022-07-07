@@ -38,4 +38,8 @@ public class Configurazione {
     public void setParametri(ParametriScambi parametri) {
         this.parametri = parametri;
     }
+
+    public void setSis(Sistema sis) {
+        this.sis = sis;
+    }
 }

@@ -1,6 +1,10 @@
 package it.unibs.IngSftw4.mainClasses;
 
 
+import it.unibs.IngSftw4.xmlUtilities.XmlReader;
+
+import javax.xml.stream.XMLStreamException;
+
 /**
  * Classe per la gestione dei menu
  *  @author Jacopo Tedeschi, Enrico Zambelli
@@ -11,7 +15,7 @@ public class Menu {
     final private static String CORNICE = "--------------------------------";
     final private static String VOCE_USCITA = "0\tEsci";
     final private static String RICHIESTA_INSERIMENTO = "Digita il numero dell'opzione desiderata : ";
-    final private static String[] VOCI_Configuratore = new String[]{"Inserimento nuova gerarchia","Visualizzazione delle gerarchie","Modifica dei parametri","Visualizza le offerte di una categoria","visualizzare le offerte in scambio o chiuse di una categoria"};
+    final private static String[] VOCI_Configuratore = new String[]{"Inserimento nuova gerarchia","Visualizzazione delle gerarchie","Modifica dei parametri","Visualizza le offerte di una categoria","visualizzare le offerte in scambio o chiuse di una categoria","Inserisci dati tramite file xml"};
     public static final String[] VOCI_Fruitore = new String[]{"Visualizza le radici e i parametri di sistema","Pubblicazione prodotto","Modificare una offerta già esistente","visualizza le tue offerte","Visualizza le offerte di una categoria","Proporre uno scambio","Controllare gli scambi"};
     public static final int ZERO = 0;
     public static final int UNO = 1;
@@ -58,7 +62,7 @@ public class Menu {
      * Metodo per la gestione del menu del configuratore
      * @param conf la configurazione su cui opera il configuratore
      */
-    public void MenuConfiguratore(Configurazione conf, Offerte offerte){
+    public void MenuConfiguratore(Configurazione conf, Offerte offerte) throws XMLStreamException {
         int risposta=1;
         this.setVoci(VOCI_Configuratore);
         do {
@@ -113,6 +117,47 @@ public class Menu {
                     Offerte daVedere=offerte.offerteFoglia(foglia[0].getNome(),foglia[1].getNome());
                     daVedere.offerteScambiate();
                     System.out.println(daVedere.toStringOfferte());
+                    break;
+                case 6:
+                    int choiceXml=Utilita.leggiIntero("Inserisci 1 se vuoi inserire gerarchie tramite xml, 2 se vuoi inserire i parametri scambi tramite xml, 0 per tornare al menù",0,2);
+                    switch(choiceXml){
+                        case 1:
+                            String nomeFile=Utilita.leggiStringa("Inserire il file xml specificando il percorso per esempio: C:\\Users\\apote\\Desktop\\testxml\\testing.xml\n" +
+                                    "Inserisci il percorso: ");
+                            boolean percorsoValido=false;
+                            if(Utilita.exist(nomeFile)){
+                                if(Utilita.isXmlFile(nomeFile)){
+                                    percorsoValido=true;
+                                }
+                            }
+                            if(percorsoValido){
+                                Sistema s= XmlReader.readSis(nomeFile);
+                                conf.setSis(s);
+                            }
+                            else{
+                                System.out.println("file o percorso non valido");
+                            }
+                            break;
+                        case 2:
+                            String nomeParam=Utilita.leggiStringa("Inserire il file xml specificando il percorso per esempio: C:\\Users\\apote\\Desktop\\testxml\\testing.xml\n" +
+                                    "Inserisci il percorso: ");
+                            boolean percorsoParam=false;
+                            if(Utilita.exist(nomeParam)){
+                                if(Utilita.isXmlFile(nomeParam)){
+                                    percorsoParam=true;
+                                }
+                            }
+                            if(percorsoParam){
+                                ParametriScambi p=XmlReader.leggiParametri(nomeParam);
+                                conf.setParametri(p);
+                            }
+                            else{
+                                System.out.println("file o percorso non valido");
+                            }
+                            break;
+                        case 0:
+                            break;
+                    }
                     break;
                 default:
                     break;
