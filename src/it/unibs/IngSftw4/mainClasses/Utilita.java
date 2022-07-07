@@ -140,6 +140,11 @@ public class Utilita {
             valido=true;
         return valido;
     }
+
+    /**
+     * Metodo per l'inserimento di una data
+     * @return la stringa corrispondente alla data inserita
+     */
     public static String inserisciData(){
         StringBuffer sb=new StringBuffer();
         int anno=Utilita.leggiIntero("Inserisci l'anno per esteso: ",2021,2100);
@@ -153,6 +158,12 @@ public class Utilita {
         }
         return sb.toString();
     }
+
+    /**
+     * Metodo per l'inserimento di un giorno del mese
+     * @param bisestile boolean che indica se l'anno è bisestile o no
+     * @return la stringa relativa al giorno del mese
+     */
     public static String inserisciGiornoMese(boolean bisestile){
         int meseNum=Utilita.leggiIntero("Inserisci il numero del mese: ", 1,12);
         StringBuffer meseGiorno=new StringBuffer();
@@ -203,7 +214,7 @@ public class Utilita {
      }
 
     /**
-     * metodo che restituisce la differenza tra due istanti in giorni
+     * Metodo che restituisce la differenza tra due istanti in giorni
      * @param old istante vecchio
      * @param nuovo instante nuovo
      * @return nuovo-old

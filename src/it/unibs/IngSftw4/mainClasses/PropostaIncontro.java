@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+/**
+ * Classe per la gestione delle proposte d'incontro
+ */
 public class PropostaIncontro {
     private String nomeFruitore;
     private String luogo;
@@ -11,6 +14,14 @@ public class PropostaIncontro {
     private String data;
     private long tempo;
 
+    /**
+     * Costruttore della classe PropostaIncontro
+     * @param _nomeFruitore nome del fruitore autore della proposta
+     * @param _luogo luogo della proposta
+     * @param _ora ora della proposta
+     * @param _data data della proposta
+     * @param _tempo tempo passato dalla creazione della proposta
+     */
     public PropostaIncontro(String _nomeFruitore, String _luogo, Orario _ora, String _data, long _tempo){
         nomeFruitore=_nomeFruitore;
         luogo=_luogo;
@@ -19,6 +30,12 @@ public class PropostaIncontro {
         tempo=_tempo;
     }
 
+    /**
+     * Metodo per la creazione di una proposta d'incontro
+     * @param fruitoreNome nome del fruitore autore
+     * @param ps parametri degli scambi
+     * @return la proposta creata
+     */
     public static PropostaIncontro creaProposta(String fruitoreNome, ParametriScambi ps){
         System.out.println("Adesso potrai creare la tua proposta per l'incontro con l'altro fruitore ");
         String luogoScelto=ps.scegliLuogo();
@@ -26,7 +43,7 @@ public class PropostaIncontro {
         String dataTemp="";
         while(!giornoCorretto){
             ArrayList <Giorno> giorniTemP=new ArrayList();
-            System.out.println("I giorni della settiaman in cui è possibile effettuare uno scambio sono: ");
+            System.out.println("I giorni della settimana in cui è possibile effettuare uno scambio sono: ");
             for(Giorno g:ps.getGiorni()) {
                 if (!giorniTemP.contains(g)) {
                     giorniTemP.add(g);
@@ -75,28 +92,48 @@ public class PropostaIncontro {
         return proposta;
     }
 
+    /**
+     * Metodo che restituisce la stringa relativa a una proposta
+     * @return la stringa relativa alla proposta
+     */
     public String visualizzaProposta(){
         StringBuffer sb=new StringBuffer();
         sb.append("\nIl luogo proposto è: "+ this.luogo+ " alle ore: "+this.ora.toStringOrario()+"\nIn data: "+ this.data);
         return sb.toString();
     }
 
+    /**
+     * Metodo get per il tempo trascorso dalla creazione della proposta
+     * @return il tempo trascorso dalla creazione della proposta
+     */
     public long getTempo() {
         return tempo;
     }
-
+    /**
+     * Metodo get per il luogo della proposta
+     * @return il luogo della proposta
+     */
     public String getLuogo() {
         return luogo;
     }
-
+    /**
+     * Metodo get per il nome del fruitore autore della proposta
+     * @return il nome del fruitore autore della proposta
+     */
     public String getNomeFruitore() {
         return nomeFruitore;
     }
-
+    /**
+     * Metodo get per l'ora della proposta
+     * @return l'ora della proposta
+     */
     public Orario getOra() {
         return ora;
     }
-
+    /**
+     * Metodo get per la data della proposta
+     * @return la data della proposta
+     */
     public String getData() {
         return data;
     }

@@ -105,7 +105,7 @@ public class Sistema {
     public String visualizzaRadici(){
         StringBuffer str=new StringBuffer();
         if(this.getListaGerarchie().size()==0){
-            str.append("siamo spiacenti ma il configuratore non ha settato alcuna gerarchia per ora");
+            str.append("Siamo spiacenti ma il configuratore non ha settato alcuna gerarchia per ora");
         }
         else{
             if(this.getListaGerarchie().size()==1){
@@ -123,9 +123,9 @@ public class Sistema {
     }
 
     /**
-     * metodo per sceglie un offerta foglia
+     * Metodo per sceglie un offerta foglia
      * @return una array di Categoria contente all'indice 0 la categoria foglia scelta
-     * e all'indice 1 la categoria radice realtiva alla categoria foglia scelta, se la selezione fallisce retunr null ad entrambi gli indici
+     * e all'indice 1 la categoria radice relativa alla categoria foglia scelta, se la selezione fallisce ritorna null a entrambi gli indici
      */
     public Categoria [] scegliFoglia() {
         Categoria[] questaRadice = new Categoria[2];
@@ -159,6 +159,11 @@ public class Sistema {
         return questaRadice;
     }
 
+    /**
+     *Metodo per valutare se una categoria è foglia
+     * @param nomeCat nome della categoria da controllare
+     * @return true se è foglia, false altrimenti
+     */
     public boolean isFoglia(String nomeCat){
         ArrayList <Categoria> foglie=new ArrayList<>();
         boolean isFoglia=false;

@@ -229,7 +229,7 @@ public class Menu {
                     }
                     break;
                 case 7:
-                    int sceltaFattiRicevuti=Utilita.leggiIntero("1 se vuoi vedere gli scambi che hai proposto\n0 se vuoi vedere quelli che ti sono stati proposti: ");
+                    int sceltaFattiRicevuti=Utilita.leggiIntero(" Inserisci 1 se vuoi vedere gli scambi che hai proposto\n    0 se vuoi vedere quelli che ti sono stati proposti: ");
                     if(sceltaFattiRicevuti==1){
                         ListaScambi fatti=listascambi.scambiOfferente(f);
                         if(fatti.getScambi().size()>0){

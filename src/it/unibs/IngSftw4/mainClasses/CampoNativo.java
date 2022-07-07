@@ -66,13 +66,18 @@ public class CampoNativo {
         StringBuffer str = new StringBuffer();
         str.append(nomeCampo);
         if(obbligatoria){
-            str.append(" compliazione obbligatoria\n");
+            str.append(" compilazione obbligatoria\n");
         }
         else
-            str.append(" compliazione facoltativa\n");
+            str.append(" compilazione facoltativa\n");
         return str.toString();
     }
 
+    /**
+     * Metodo per confrontare due campi
+     * @param c il campo con confrontare quello su cui viene invocato
+     * @return true se i due campi sono uguali, false altrimenti
+     */
     public boolean compareCampo(CampoNativo c){
         boolean uguali=false;
         if(this.nomeCampo.equals(c.nomeCampo) && this.obbligatoria==c.obbligatoria)
