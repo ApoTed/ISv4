@@ -104,9 +104,9 @@ public class Offerta {
     }
 
     /**
-     *
-     * @param toCompare
-     * @return
+     * Metodo per confrontare due offerte
+     * @param toCompare l'offerta con cui confrontare quella attuale
+     * @return true se sono uguali, false altrimenti
      */
     public boolean confrontaOfferta(Offerta toCompare){
         boolean uguale=false;

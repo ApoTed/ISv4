@@ -154,7 +154,7 @@ public class Scambio {
     public boolean scambioScaduto(ParametriScambi ps){
         boolean scaduto=false;
         long tempoOra=Calendar.getInstance().getTimeInMillis();
-        long differenza=Utilita.compareIstants(this.tempo,tempoOra);
+        long differenza=Utilita.compareInstants(this.tempo,tempoOra);
         if(differenza>ps.getScadenza()){
             scaduto=true;
             this.ricevente.cambiaStato(StatoOfferta.APERTA);

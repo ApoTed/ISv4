@@ -101,7 +101,7 @@ public class ParametriScambi {
     }
 
     /**
-     * metodo che restituisce i giorni della settimana sotto forma di numero partendo da giovedì
+     * Metodo che restituisce i giorni della settimana sotto forma di numero partendo da giovedì
      * @return lista dei numeri rispettivi ai giorni
      */
     public ArrayList<Integer> giorniInInteri(){

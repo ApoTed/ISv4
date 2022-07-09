@@ -129,7 +129,7 @@ public class Offerte {
 
     /**
      * Metodo che restituisce solo le offerte in scambio o chiuse
-     * @return
+     * @return la lista delle offerte in scambio o chiuse
      */
     public void offerteScambiate(){
         ArrayList <Offerta> temp=new ArrayList<>();

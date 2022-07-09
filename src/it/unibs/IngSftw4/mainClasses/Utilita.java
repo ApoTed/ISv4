@@ -1,8 +1,6 @@
 package it.unibs.IngSftw4.mainClasses;
 
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -200,7 +198,7 @@ public class Utilita {
      * @param nuovo instante nuovo
      * @return nuovo-old
      */
-    public static long compareIstants(long old, long nuovo){
+    public static long compareInstants(long old, long nuovo){
         return  ((nuovo/(1000*60*60*24))-(old/(1000*60*60*24)));
     }
 

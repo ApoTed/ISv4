@@ -1,0 +1,335 @@
+@startuml
+
+skinparam classAttributeIconSize 0
+
+class DatiUtenti {
+{field}{static} +CREDENZIALI_PREDEFINITE : Utente =new Configuratore("UserStandard", "PasswordStandard") {readOnly}
+{static} +INSERISCI_NOME : String = "Inserisci il tuo nome: " {readOnly}
+{static} +INSERISCI_PASSWORD : String = "Inserisci la tua password: " {readOnly}
+{static} +CATEGORIA_NON_PRESENTE : String = "Categoria non presente" {readOnly}
+{static} +NOME_NON_DISPONIBILE : String = "Questo nome utente non è disponibile" {readOnly}
+{static} +NUOVA_PASSWORD : String = "Inserisci la tua nuova password" {readOnly}
+-listaUtenti : ArrayList<Utente>
++DatiUtenti( _ListaUtenti : ArrayList<Utente> ) : DatiUtente
++setListaUtenti( listaUtenti : ArrayList<Utente> )
++getUtenteDaCredenziali( nome : String, password : String ) : Utente
++checkConf( u : Utente ) : boolean
++getListaUtenti() : ArrayList<Utente>
++menuAccesso() : Utente
++checkCredenziali( userName : String, password : String ) : boolean
++addUtente( nome : String, password : String, conf : boolean ) : boolean
++checkName( nome : String ) : boolean
++nuovoConfiguratore() : Utente
+}
+
+class Gerarchia{
+-ramo : HashMap<Categoria,Categoria>
+-radice : Categoria
++Gerarchia( _ramo : HashMap<Categoria,Categoria> , _radice : Categoria ) : Gerarchia
++Gerarchia() : Gerarchia
+{static} +creaRamo ( nomeRadice : String ) : Gerarchia
++checkNomeNuovo( s : String ) : boolean
++getRadice() : Categoria
++setRadice( radice : Categoria )
++getRamo() : HashMap<Categoria,Categoria>
++addCategoria( toAdd : Categoria, padre : Categoria ) : Gerarchia
++checkPadreNome( nome : String ) : boolean
++findPadre( nomePadre : String ) : Categoria
++vediRamo() : String
++vediPadri() : String
++numFigli( padre : Categoria ) : int
++listaPadri() : String
++isFoglia (toCheck : Categoria ) : boolean
++listaFoglie() : ArrayList<Categoria>
+}
+
+class CampoNativo{
+-nomeCampo : String
+-obbligatoria : boolean
++CampoNativo ( _nomeCampo : String, _obbligatoria : boolean ) : CampoNativo
+{static} +creaCampo( nameToCompare : ArrayList<String> ) : CampoNativo
++getNomeCampo() : String
++toString() : String
++isObbligatoria() : boolean
++compareCampo ( c : CampoNativo ) : boolean
+}
+
+class Categoria{
+-descrizione : String
+-nome :String
+-campiNativi : ArrayList<CampoNativo>
++Categoria( _nome : String, _descrizione : String, _campiNativi : ArrayList<CampoNativo> ) : Categoria
++getNome() : String
++getDescrizione() : String
++getCampiNativi() : ArrayList<CampoNativo>
++toStringCategoria() : String
+{static} +creaCategoria( campi : ArrayList<CampoNativo>, nomeCat : String ) : Categoria
+}
+
+class Menu {
+{static} +UNO : int = 1 {readOnly}
+{static} +ZERO : int = 0 {readOnly}
+{static} -CORNICE : String = "--------------------------------" {readOnly}
+{static} -VOCE_USCITA : String = "0\tEsci" {readOnly}
+{static} -RICHIESTA_INSERIMENTO : String = "Digita il numero dell'opzione desiderata : " {readOnly}
+{static} -VOCI_CONFIGURATORE : String[] = new String[]{"Inserimento nuova gerarchia","Visualizzazione delle gerarchie","Modifica dei parametri","Visualizza le offerte di una categoria","visualizzare le offerte in scambio o chiuse di una categoria"} {readOnly}
+{static} -VOCI_FRUITORE : String[] = new String[]{"Visualizza le radici e i parametri di sistema","Pubblicazione prodotto","Modificare una offerta già esistente","visualizza le tue offerte","Visualizza le offerte di una categoria","Proporre uno scambio","Controllare gli scambi"} {readOnly}
+-titolo : String
+-voci : String[]
++Menu( titolo : String, voci : String[] ) : Menu
++getVoci() : String[]
++StampaMenu()
++MenuConfiguratore( conf : Configurazione, offerte : Offerte )
++MenuFruitore( conf : Configurazione, f : Fruitore, offerte : Offerte )
++setVoci( voci : String[] )
++scegli() : int
+}
+
+class Sistema {
+-listaGerarchie : ArrayList<Gerarchia>
++Gerarchia( _listaGerarchie : ArrayList<Gerarchia> ) : Sistema
++checkNomeNuovoRadice( s : String ) : boolean
++toStringSistema() : String
++addGerarchia( g : Gerarchia )
++findCategoria( nome : String, numGer : int ) : Categoria
++getListaCategorie() : ArrayList<Gerarchia>
++visualizzaRadici() : String
++getListaRadici() : ArrayList<Categoria>
++scegliFoglia() : Categoria[]
++isFoglia ( nomeCat : String ) : boolean
+}
+
+class Utilita {
+{static} -ERRORE_FORMATO : String = "Attenzione il dato inserito non e' nel formato corretto" {readOnly}
+{static} -ERRORE_MASSIMO : String = "Attenzione: e' richiesto un valore minore o uguale a " {readOnly}
+{static} -ERRORE_MINIMO : String = "Attenzione: e' richiesto un valore maggiore o uguale a " {readOnly}
+{static} +ERRORE_STRINGA_VUOTA : String = "La stringa inserita non può essere vuota" {readOnly}
+{static} +CATEGORIA_NON_PRESENTE : String = "Categoria non presente" {readOnly}
+{static} -lettore : Scanner
+{static} -creaScanner() : Scanner
+{static} +leggiCategoria ( sistema : Sistema ) : Categoria
+{static} +leggiStringaNonVuota( messaggio : String ) : String
+{static} +leggiStringa( messaggio : String ) : String
+{static} +leggintero( messaggio : String ) : int
+{static} +leggintero( messaggio : String, minimo : int, massimo : int ) : int
+{static} +compareInstants ( old : long, nuovo : long ) : long
+{static} +checkGiornoSettimana ( dataStringa : String, listaGiorniSettimana : ArrayList<Integer ) : boolean
+{static} +inserisciData() : String
+{static} +inserisciGiornoMese ( bisestile : boolean ) : String
+}
+
+class Utente {
+-username : String
+-password : String
++Utente ( _username : String, _password : String ) : Utente
++getUsername() : String
++setUsername ( username : String)
++getPassword() : String
++setPassword( password : String )
+{static} +sameUtente ( u1 : Utente, u2 : Utente ) : boolean
+}
+
+class Configuratore {
++Configuratore ( _username : String, _password : String ) : Configuratore
+}
+
+class Fruitore {
++Fruitore ( _username : String, _password : String ) : Fruitore
+}
+
+Utente <|-- Configuratore
+Utente <|-- Fruitore
+
+class Configurazione {
+-sistema : Sistema
+-parametri : ParametriScambi
++Configurazione ( _sis : Sistema, _parametri : ParametriScambi ) : Configurazione
+getParametri() : ParametriScambi
+setParametri ( parametri : ParametriScambi )
+getSis() : Sistema
+}
+
+class ParametriScambi {
+-piazza : String
+-luoghi : ArrayList<String>
+-intervalli : ArrayList<Intervallo>
+-giorni : ArrayList<Giorno>
+-scadenza : int
++ParametriScambi (_piazza : String, _luoghi : ArrayList<String>, _intervalli : ArrayList<Intervallo>, _giorni : ArrayList<Giorno>, _scadenza : int ) : ParametriScambi
++addGiorno()
++togliGiorno()
++getLuoghi() : ArrayList<String>
++getScadenza() : int
+{static} +inserimentoParametri() : ParametriScambi
++togliLuogo()
++modificaParametri()
+{static} +addIntervallo() : Intervallo
++addLuogo ( s : String )
++getIntervalli() : ArrayList<Intervallo>
++getGiorni() : ArrayList<Giorno>
++getPiazza() : String
++addLuogo()
++toStringParametri() : String
++addScadenza()
++togliIntervallo()
++vediIntervalli() : String
++giorniInInteri() : ArrayList<Integer>
++scegliLuogo() : String
+}
+
+enum Giorno {
+LUNEDI
+MARTEDI
+MERCOLEDI
+GTIOVEDI
+VENERDI
+SABATO
+DOMENICA
++toString() : String
++getGiornoFromString ( gg : String ) : Giorno
++getNumFromDay() : int
+}
+
+class Orario {
+-ora : int
+-minuti : int
++Orario ( _ora : int, _minuti : int ) : Orario
+{static} +getOrarioFromString( ora : String ) : Orario
++getMinuti() : int
++getOra() : int
++orarioValido() : boolean
+toStringOrario() : String
+isInsideIntervallo ( o1 : Orario, o2 : Orario ) : boolean
+}
+
+class Intervallo {
+-ore : String[]
++Intervallo ( _ore : String[] ) : Intervallo
++compareIntervallo ( toCompare : Intervallo ) : boolean
+{static} +creaIntervallo ( o : Orario[] ) : Intervallo
++intervalloValido() : boolean
++getOre() : Orario[]
++setOre ( ore : Orario[] )
++toStringIntervallo() : String
+}
+
+class Offerta {
+-nomeFruitore : String
+-statiPassati : ArrayList<StatoOfferta>
+-compilazioni : HashMap<CampoNativo,String>
+-statoAttuale : StatoOfferta
+-nomeCategoria : String
+-nomeRadice : String
++Offerta() : Offerta
++Offerta( _nomeFruitore : String, _statiPassati : ArrayList<StatoOfferta>, _compilazioni : HashMap<CampoNativo,String>, _statoAttuale : StatoOfferta, _nomeCategoria : String, _nomeRadice : String) : Offerta
++cambiaStato( so : StatoOfferta )
++getNomeCategoria() : String
++getNomeRadice() : String
++creaOfferta ( s : Sistema, nome : String) : boolean
++compilaCampi ( c : Categoria )
++getCompilazioni() : HashMap<CampoNativo,String>
++getStatoAttuale() : StatoOfferta
++toStringCompilazioni() : String
++toStringOfferta() : String
++getStatiPassati() : ArrayList<StatoOfferta>
++getNomeFruitore() : String
++toStringOffertaConAutore() : String
++confrontaOfferta ( toCompare : Offerta ) : boolean
+}
+
+class Offerte{
+-listaOfferte : Arraylist<Offerta>
++Offerte ( _listaOfferte : Arraylist<Offerta> ) : Offerte
++tieniAperte()
++offerteFoglia ( nomeFoglia : String ) : Offerte
++getOfferteFromFruitore ( nomeFruitore : String ) : ArrayList<Offerta>
++stampaOfferteFoglia ( conf : Configurazione )
++getListaOfferte() : ArrayList<Offerta>
++scegliOfferta() : Offerta
++toStringOfferta() : String
++addOffertaAunFruitore( o : Offerta )
++modificaOffertaEsistente( toChange : Offerta)
++offerteInScambio()
++OfferteFoglia ( nomeFoglia : String, nomeRadice : String ) : Offerte
++togliOfferta ( o : Offerta )
++offerteScambiabili ( daScambiare : Offerta ) : Offerte
+}
+
+enum StatoOfferta{
+RITIRATA
+ACCOPPIATA
+SELEZIONATA
+INSCAMBIO
+CHIUSA
+APERTA
++toStringStato() : String
++getStatoFromString ( stato : String ) : StatoOfferta
+}
+
+class PropostaIncontro {
+-nomeFruitore : String
+-ora : Orario
+-tempo : long
+-luogo : String
+-data : String
++PropostaIncontro ( _nomeFruitore : String, _ora : Orario, _tempo : long, _luogo : String, _data : String ) : PropostaIncontro
+{static} +creaProposta ( fruitoreNome : String, ps : ParametriScambi ) : PropostaIncontro
++visualizzaProposta() : String
++getLuogo() : String
++getOra() : Orario
++getData() : String
++getNomeFruitore() : String
++getTempo() : long
+}
+
+class ListaScambi {
+-scambi : ArrayList<Scambio>
++ListaScambi ( _scambi : ArrayList<Scambio> )
++addScambio ( scambio : Scambio )
++vediScambi() : String
++scambiOfferente ( f : Fruitore ) : ListaScambi
++scegliScambio() : Scambio
++scambiRicevente ( f : Fruitore ) : ListaScambi
++aggiornaScambio (sca : Scambio, index : int )
++getScambi() : ArrayList<Scambio>
++controllaValiditàScambi ( ps : ParametriScambi )
+}
+
+class Scambio {
+-ultimaProposta : PropostaIncontro
+-tempo : long
+-ricevente : Offerta
+-offerente : Offerta
++Scambio (_ultimaProposta : PropostaIncontro, _tempo : long, _ricevente : Offerta, _offerente : Offerta ) : Scambio
++scambioScaduto ( ps : ParametriScambi ) : boolean
++cambiaProposta ( pi : PropostaIncontro )
+{static} +creaScambio ( conf : Configurazione, tutteLeOfferte : Offerte, f : Fruitore ) : Scambio
++getUltimaProposta() : PropostaIncontro
++getTempo() : long
++getRicevente() : Offerta
++getOfferente() : Offerta
++statoScambio() : int
++vediOfferteScambio() : Scambio
++gestisciScambio ( f : Fruitore, ps : ParametriScambi, offerte : Offerte )
+}
+
+class XmlWriter {
+{static} +salvaSistema ( s : Sistema, fileName : String )
+{static} +utentiWrite ( utenti : DatiUtenti, fileName : String )
+{static} +salvaParametri ( p : ParametriScambi, fileName : String )
+{static} +salvaOfferte ( offerte : Offerte, fileName : String )
+{static} +scriviScambi ( listaScambi : ListaScambi, fileName : String )
+}
+
+class XmlReader {
+{static} +leggiUtenti ( fileName : String ) : DatiUtenti
+{static} +readSis ( fileName : String ) : Sistema
+{static} +leggiParametri ( fileName : String ) : ParametriScambi
+{static} +leggiOfferte ( fileName : String ) : Offerte
+{static} +leggiScambi ( fileName : String ) : ListaScambi
+}
+
+class Main {
+{static} +main( args : String[] )
+}
+@enduml
