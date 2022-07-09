@@ -1,6 +1,10 @@
 package it.unibs.IngSftw4.mainClasses;
 
 
+import it.unibs.IngSftw4.xmlUtilities.XmlReader;
+
+import javax.xml.stream.XMLStreamException;
+
 /**
  * Classe per la gestione dei menu
  *  @author Jacopo Tedeschi, Enrico Zambelli
@@ -12,7 +16,7 @@ public class Menu {
     final private static String VOCE_USCITA = "0\tEsci";
     final private static String RICHIESTA_INSERIMENTO = "Digita il numero dell'opzione desiderata : ";
     final private static String[] VOCI_Configuratore = new String[]{"Inserimento nuova gerarchia","Visualizzazione delle gerarchie","Modifica dei parametri","Visualizza le offerte di una categoria","visualizzare le offerte in scambio o chiuse di una categoria"};
-    public static final String[] VOCI_Fruitore = new String[]{"Visualizza le radici e i parametri di sistema","Pubblicazione prodotto","Modificare una offerta già esistente","Visualizza le tue offerte","Visualizza le offerte di una categoria","Proporre uno scambio","Controllare gli scambi"};
+    public static final String[] VOCI_Fruitore = new String[]{"Visualizza le radici e i parametri di sistema","Pubblicazione prodotto","Modificare una offerta già esistente","visualizza le tue offerte","Visualizza le offerte di una categoria","Proporre uno scambio","Controllare gli scambi"};
     public static final int ZERO = 0;
     public static final int UNO = 1;
 
