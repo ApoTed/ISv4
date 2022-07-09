@@ -39,6 +39,10 @@ public class Configurazione {
         this.parametri = parametri;
     }
 
+    /**
+     * Metodo set per il sistema
+     * @param sis il sistema da settare
+     */
     public void setSis(Sistema sis) {
         this.sis = sis;
     }
