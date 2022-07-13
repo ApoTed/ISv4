@@ -292,7 +292,7 @@ class ListaScambi {
 +scambiRicevente ( f : Fruitore ) : ListaScambi
 +aggiornaScambio (sca : Scambio, index : int )
 +getScambi() : ArrayList<Scambio>
-+controllaValiditàScambi ( ps : ParametriScambi )
++controllaValiditàScambi ( ps : ParametriScambi, offerte : Offerte )
 }
 
 class Scambio {
@@ -301,7 +301,7 @@ class Scambio {
 -ricevente : Offerta
 -offerente : Offerta
 +Scambio (_ultimaProposta : PropostaIncontro, _tempo : long, _ricevente : Offerta, _offerente : Offerta ) : Scambio
-+scambioScaduto ( ps : ParametriScambi ) : boolean
++scambioScaduto ( ps : ParametriScambi, offerte : Offerte ) : boolean
 +cambiaProposta ( pi : PropostaIncontro )
 {static} +creaScambio ( conf : Configurazione, tutteLeOfferte : Offerte, f : Fruitore ) : Scambio
 +getUltimaProposta() : PropostaIncontro

@@ -55,11 +55,12 @@ public class main {
         if(fileOfferte.exists() && !fileOfferte.isDirectory()) {
             listaOff.addAll(XmlReader.leggiOfferte("offerte.xml").getListaOfferte());
         }
-        if(scambi!=null){
-            if(scambi.getScambi().size()>0)
-                scambi.controllaValiditaScambi(conf.getParametri());
-        }
         Offerte offerte=new Offerte(listaOff);
+        if(scambi!=null && offerte.getListaOfferte().size()!=0){
+            if(scambi.getScambi().size()>0)
+                scambi.controllaValiditaScambi(conf.getParametri(), offerte);
+        }
+
         //PropostaIncontro p=PropostaIncontro.creaProposta(acceduto.getUsername(), conf.getParametri());
         if(acceduto instanceof Configuratore){
             String titolo="Benvenuto nel sistema di gestione baratti";

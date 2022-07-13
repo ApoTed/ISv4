@@ -83,11 +83,12 @@ public class ListaScambi {
     /**
      * Metodo per aggiornare la lista degli scambi in base a quelli scaduti
      * @param ps i parametri degli scambi
+     * @param offerte le offerte del sistema
      */
-    public void controllaValiditaScambi(ParametriScambi ps){
+    public void controllaValiditaScambi(ParametriScambi ps,Offerte offerte){
         ArrayList <Scambio> temp=new ArrayList<>();
         for(Scambio s:this.scambi){
-            if(!s.scambioScaduto(ps)){
+            if(!s.scambioScaduto(ps,offerte)){
                 temp.add(s);
             }
         }

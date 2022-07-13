@@ -149,16 +149,19 @@ public class Scambio {
     /**
      * Metodo che controlla se uno scambio è scaduto e se lo è rimette le offerte nello stato aperta
      * @param ps parametri scambi in cui c'è la scadenza degli scambi
+     * @param offerte le offerte del sistema
      * @return true se è scaduto, false altrimenti
      */
-    public boolean scambioScaduto(ParametriScambi ps){
+    public boolean scambioScaduto(ParametriScambi ps, Offerte offerte){
         boolean scaduto=false;
         long tempoOra=Calendar.getInstance().getTimeInMillis();
-        long differenza=Utilita.compareInstants(this.tempo,tempoOra);
+        long differenza=Utilita.compareIstants(this.tempo,tempoOra);
         if(differenza>ps.getScadenza()){
             scaduto=true;
             this.ricevente.cambiaStato(StatoOfferta.APERTA);
             this.offerente.cambiaStato(StatoOfferta.APERTA);
+            offerte.modificaOffertaEsistente(ricevente, StatoOfferta.APERTA);
+            offerte.modificaOffertaEsistente(offerente, StatoOfferta.APERTA);
         }
         return scaduto;
     }
