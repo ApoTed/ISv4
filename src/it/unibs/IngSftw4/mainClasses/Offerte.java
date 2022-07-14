@@ -165,7 +165,7 @@ public class Offerte {
     /**
      * Metodo che restituisce le offerte con l'offerta daScambiare può proporre uno scambio
      * @param daScambiare offerta di cui si vogliono le possibili offerte con cui scambiarla
-     * @return le offerte  con cui si può fare lo scambio
+     * @return le offerte con cui si può fare lo scambio
      */
     public Offerte offerteScambiabili(Offerta daScambiare){
         ArrayList <Offerta> offerteScambiabili=new ArrayList<Offerta>();
