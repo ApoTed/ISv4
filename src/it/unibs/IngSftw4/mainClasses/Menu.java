@@ -239,7 +239,7 @@ public class Menu {
 
 
     /**
-     * Metodo get per le voci del menu
+     * Metodo get per ottenere le voci del menu
      * @return le voci del menu
      */
     public String[] getVoci() {
